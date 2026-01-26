@@ -78,27 +78,7 @@ export function Header() {
                 isScrolled ? "text-foreground hover:text-foreground/80" : "text-white hover:text-white/80"
               )}
             >
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className={cn(
-                "hidden md:flex transition-colors",
-                isScrolled ? "text-foreground hover:text-foreground/80" : "text-white hover:text-white/80"
-              )}
-            >
               <Heart className="h-5 w-5" />
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className={cn(
-                "hidden md:flex transition-colors",
-                isScrolled ? "text-foreground hover:text-foreground/80" : "text-white hover:text-white/80"
-              )}
-            >
-              <User className="h-5 w-5" />
             </Button>
             <Button 
               variant="ghost" 
