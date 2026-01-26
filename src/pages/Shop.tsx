@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Heart, ShoppingBag, Star, SlidersHorizontal, X, ChevronDown } from 'lucide-react';
-import { Header } from '@/components/layout/Header';
+import { Link, useLocation } from 'react-router-dom';
+import { Heart, ShoppingBag, Star, SlidersHorizontal, X, ChevronDown, Menu, Search, User } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -15,62 +14,70 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
 import wigProduct1 from '@/assets/wig-product-1.jpg';
 import wigProduct2 from '@/assets/wig-product-2.jpg';
 import wigProduct3 from '@/assets/wig-product-3.jpg';
 import wigProduct4 from '@/assets/wig-product-4.jpg';
 
+const navLinks = [
+  { name: 'Accueil', path: '/' },
+  { name: 'Boutique', path: '/shop' },
+  { name: 'À propos', path: '/about' },
+  { name: 'Contact', path: '/contact' },
+];
+
 const allWigs = [
   {
     id: 1,
-    name: 'Silky Straight Noir',
-    type: 'Human Hair',
-    texture: 'Straight',
-    length: '18"',
-    color: 'Black',
+    name: 'Lisse Soyeux Noir',
+    type: 'Cheveux Humains',
+    texture: 'Lisse',
+    length: '45cm',
+    color: 'Noir',
     price: 449,
     originalPrice: 549,
     rating: 4.9,
     reviews: 128,
     image: wigProduct1,
-    badge: 'Best Seller',
+    badge: 'Meilleure Vente',
     inStock: true,
   },
   {
     id: 2,
-    name: 'Auburn Curly Glamour',
-    type: 'Human Hair',
-    texture: 'Curly',
-    length: '16"',
+    name: 'Boucles Auburn Glamour',
+    type: 'Cheveux Humains',
+    texture: 'Bouclé',
+    length: '40cm',
     color: 'Auburn',
     price: 529,
     rating: 4.8,
     reviews: 96,
     image: wigProduct2,
-    badge: 'New Arrival',
+    badge: 'Nouveauté',
     inStock: true,
   },
   {
     id: 3,
-    name: 'Honey Blonde Waves',
-    type: 'Human Hair',
-    texture: 'Body Wave',
-    length: '22"',
-    color: 'Blonde',
+    name: 'Ondulations Blond Miel',
+    type: 'Cheveux Humains',
+    texture: 'Ondulé',
+    length: '55cm',
+    color: 'Blond',
     price: 599,
     rating: 5.0,
     reviews: 214,
     image: wigProduct3,
-    badge: "Editor's Choice",
+    badge: 'Choix de l\'Éditeur',
     inStock: true,
   },
   {
     id: 4,
-    name: 'Natural Afro Queen',
-    type: 'Human Hair',
-    texture: 'Kinky',
-    length: '14"',
-    color: 'Black',
+    name: 'Afro Naturel Queen',
+    type: 'Cheveux Humains',
+    texture: 'Crépu',
+    length: '35cm',
+    color: 'Noir',
     price: 479,
     rating: 4.9,
     reviews: 87,
@@ -79,11 +86,11 @@ const allWigs = [
   },
   {
     id: 5,
-    name: 'Classic Bob Black',
-    type: 'Synthetic',
-    texture: 'Straight',
-    length: '12"',
-    color: 'Black',
+    name: 'Bob Classique Noir',
+    type: 'Synthétique',
+    texture: 'Lisse',
+    length: '30cm',
+    color: 'Noir',
     price: 189,
     rating: 4.7,
     reviews: 156,
@@ -92,11 +99,11 @@ const allWigs = [
   },
   {
     id: 6,
-    name: 'Ombre Elegance',
-    type: 'Human Hair',
-    texture: 'Body Wave',
-    length: '20"',
-    color: 'Ombre',
+    name: 'Élégance Ombré',
+    type: 'Cheveux Humains',
+    texture: 'Ondulé',
+    length: '50cm',
+    color: 'Ombré',
     price: 549,
     rating: 4.8,
     reviews: 92,
@@ -105,25 +112,25 @@ const allWigs = [
   },
   {
     id: 7,
-    name: 'Deep Curly Burgundy',
-    type: 'Human Hair',
-    texture: 'Curly',
-    length: '18"',
-    color: 'Burgundy',
+    name: 'Boucles Profondes Bordeaux',
+    type: 'Cheveux Humains',
+    texture: 'Bouclé',
+    length: '45cm',
+    color: 'Bordeaux',
     price: 489,
     rating: 4.9,
     reviews: 73,
     image: wigProduct2,
-    badge: 'Limited Edition',
+    badge: 'Édition Limitée',
     inStock: true,
   },
   {
     id: 8,
-    name: 'Natural Kinky Coils',
-    type: 'Human Hair',
-    texture: 'Kinky',
-    length: '16"',
-    color: 'Black',
+    name: 'Spirales Crépues Naturelles',
+    type: 'Cheveux Humains',
+    texture: 'Crépu',
+    length: '40cm',
+    color: 'Noir',
     price: 459,
     rating: 4.8,
     reviews: 64,
@@ -133,10 +140,10 @@ const allWigs = [
 ];
 
 const filterOptions = {
-  type: ['Human Hair', 'Synthetic'],
-  texture: ['Straight', 'Curly', 'Body Wave', 'Kinky'],
-  length: ['12"', '14"', '16"', '18"', '20"', '22"'],
-  color: ['Black', 'Auburn', 'Blonde', 'Burgundy', 'Ombre'],
+  type: ['Cheveux Humains', 'Synthétique'],
+  texture: ['Lisse', 'Bouclé', 'Ondulé', 'Crépu'],
+  length: ['30cm', '35cm', '40cm', '45cm', '50cm', '55cm'],
+  color: ['Noir', 'Auburn', 'Blond', 'Bordeaux', 'Ombré'],
 };
 
 type FilterKey = keyof typeof filterOptions;
@@ -193,27 +200,36 @@ const Shop = () => {
     }
   });
 
-  const FilterSection = ({ category }: { category: FilterKey }) => (
-    <div className="mb-6">
-      <h4 className="font-medium mb-3 capitalize">{category}</h4>
-      <div className="space-y-2">
-        {filterOptions[category].map((option) => (
-          <label
-            key={option}
-            className="flex items-center gap-3 cursor-pointer group"
-          >
-            <Checkbox
-              checked={filters[category].includes(option)}
-              onCheckedChange={() => toggleFilter(category, option)}
-            />
-            <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-              {option}
-            </span>
-          </label>
-        ))}
+  const FilterSection = ({ category }: { category: FilterKey }) => {
+    const categoryNames = {
+      type: 'Type',
+      texture: 'Texture',
+      length: 'Longueur',
+      color: 'Couleur'
+    };
+    
+    return (
+      <div className="mb-6">
+        <h4 className="font-medium mb-3">{categoryNames[category]}</h4>
+        <div className="space-y-2">
+          {filterOptions[category].map((option) => (
+            <label
+              key={option}
+              className="flex items-center gap-3 cursor-pointer group"
+            >
+              <Checkbox
+                checked={filters[category].includes(option)}
+                onCheckedChange={() => toggleFilter(category, option)}
+              />
+              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                {option}
+              </span>
+            </label>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const FiltersContent = () => (
     <div className="space-y-6">
@@ -223,7 +239,7 @@ const Shop = () => {
       <FilterSection category="color" />
       
       <div className="mb-6">
-        <h4 className="font-medium mb-4">Price Range</h4>
+        <h4 className="font-medium mb-4">Gamme de Prix</h4>
         <Slider
           value={filters.priceRange}
           onValueChange={(value) => setFilters((prev) => ({ ...prev, priceRange: value as [number, number] }))}
@@ -232,8 +248,8 @@ const Shop = () => {
           className="mb-2"
         />
         <div className="flex justify-between text-sm text-muted-foreground">
-          <span>${filters.priceRange[0]}</span>
-          <span>${filters.priceRange[1]}</span>
+          <span>{filters.priceRange[0]}€</span>
+          <span>{filters.priceRange[1]}€</span>
         </div>
       </div>
 
@@ -250,25 +266,25 @@ const Shop = () => {
           })
         }
       >
-        Clear All Filters
+        Effacer tous les Filtres
       </Button>
     </div>
   );
 
   return (
     <div className="min-h-screen">
-      <Header />
+      <ShopHeader />
       
-      <main className="pt-24">
+      <main>
         {/* Page Header */}
-        <div className="bg-secondary/30 py-16 md:py-24">
+        <div className="bg-secondary/30 py-16 md:py-24 pt-24">
           <div className="container-luxury text-center">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium mb-4"
             >
-              Shop <span className="text-gradient-gold">Premium Wigs</span>
+              Boutique <span className="text-gradient-gold">Perruques Premium</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -276,7 +292,7 @@ const Shop = () => {
               transition={{ delay: 0.1 }}
               className="text-lg text-muted-foreground max-w-2xl mx-auto"
             >
-              Discover our collection of luxury wigs crafted with the finest quality hair
+              Découvrez notre collection de perruques de luxe confectionnées avec les cheveux de la plus haute qualité
             </motion.p>
           </div>
         </div>
@@ -286,7 +302,7 @@ const Shop = () => {
             {/* Desktop Filters Sidebar */}
             <aside className="hidden lg:block w-64 flex-shrink-0">
               <div className="sticky top-28">
-                <h3 className="font-serif text-xl font-medium mb-6">Filters</h3>
+                <h3 className="font-serif text-xl font-medium mb-6">Filtres</h3>
                 <FiltersContent />
               </div>
             </aside>
@@ -296,7 +312,7 @@ const Shop = () => {
               {/* Toolbar */}
               <div className="flex items-center justify-between mb-8">
                 <p className="text-muted-foreground">
-                  <span className="font-medium text-foreground">{sortedWigs.length}</span> wigs found
+                  <span className="font-medium text-foreground">{sortedWigs.length}</span> perruques trouvées
                 </p>
 
                 <div className="flex items-center gap-4">
@@ -305,12 +321,12 @@ const Shop = () => {
                     <SheetTrigger asChild>
                       <Button variant="outline" className="lg:hidden">
                         <SlidersHorizontal className="h-4 w-4 mr-2" />
-                        Filters
+                        Filtres
                       </Button>
                     </SheetTrigger>
                     <SheetContent side="left">
                       <SheetHeader>
-                        <SheetTitle className="font-serif">Filters</SheetTitle>
+                        <SheetTitle className="font-serif">Filtres</SheetTitle>
                       </SheetHeader>
                       <div className="mt-6">
                         <FiltersContent />
@@ -325,11 +341,11 @@ const Shop = () => {
                       onChange={(e) => setSortBy(e.target.value)}
                       className="appearance-none bg-card border border-border rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-gold cursor-pointer"
                     >
-                      <option value="featured">Featured</option>
-                      <option value="new">Newest</option>
-                      <option value="price-low">Price: Low to High</option>
-                      <option value="price-high">Price: High to Low</option>
-                      <option value="rating">Highest Rated</option>
+                      <option value="featured">En Vedette</option>
+                      <option value="new">Plus Récent</option>
+                      <option value="price-low">Prix: Croissant</option>
+                      <option value="price-high">Prix: Décroissant</option>
+                      <option value="rating">Mieux Noté</option>
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none text-muted-foreground" />
                   </div>
@@ -369,7 +385,7 @@ const Shop = () => {
                           {!wig.inStock && (
                             <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
                               <span className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
-                                Sold Out
+                                Épuisé
                               </span>
                             </div>
                           )}
@@ -382,7 +398,7 @@ const Shop = () => {
                             <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
                               <Button variant="gold" size="lg" className="w-full">
                                 <ShoppingBag className="h-4 w-4" />
-                                Add to Cart
+                                Ajouter au Panier
                               </Button>
                             </div>
                           )}
@@ -421,10 +437,10 @@ const Shop = () => {
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-lg font-semibold">${wig.price}</span>
+                            <span className="text-lg font-semibold">{wig.price}€</span>
                             {wig.originalPrice && (
                               <span className="text-sm text-muted-foreground line-through">
-                                ${wig.originalPrice}
+                                {wig.originalPrice}€
                               </span>
                             )}
                           </div>
@@ -438,7 +454,7 @@ const Shop = () => {
               {sortedWigs.length === 0 && (
                 <div className="text-center py-20">
                   <p className="text-xl text-muted-foreground mb-4">
-                    No wigs match your filters
+                    Aucune perruque ne correspond à vos filtres
                   </p>
                   <Button
                     variant="outline"
@@ -452,7 +468,7 @@ const Shop = () => {
                       })
                     }
                   >
-                    Clear Filters
+                    Effacer les Filtres
                   </Button>
                 </div>
               )}
@@ -465,5 +481,115 @@ const Shop = () => {
     </div>
   );
 };
+
+// Header fixe pour la page Shop
+function ShopHeader() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  return (
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50 shadow-soft py-3 transition-all duration-500">
+        <div className="container-luxury flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <span className="font-serif text-2xl md:text-3xl font-semibold tracking-tight text-foreground transition-colors">
+              Luxe<span className="text-gradient-gold">Wig</span>
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-10">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'link-underline text-sm font-medium tracking-wide transition-colors',
+                  location.pathname === link.path
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
+              <Heart className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
+              <User className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" className="relative text-foreground hover:text-foreground/80 transition-colors">
+              <ShoppingBag className="h-5 w-5" />
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-gold rounded-full text-xs font-semibold flex items-center justify-center text-primary">
+                0
+              </span>
+            </Button>
+
+            {/* Mobile Menu Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden text-foreground hover:text-foreground/80 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 lg:hidden"
+          >
+            <div className="absolute inset-0 bg-background/95 backdrop-blur-lg pt-24">
+              <nav className="flex flex-col items-center gap-8 pt-10">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      to={link.path}
+                      className={cn(
+                        'font-serif text-2xl font-medium tracking-wide transition-colors',
+                        location.pathname === link.path
+                          ? 'text-foreground'
+                          : 'text-muted-foreground'
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
 
 export default Shop;

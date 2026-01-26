@@ -11,11 +11,11 @@ const About = () => {
     <div className="min-h-screen">
       <Header />
 
-      <main className="pt-24">
+      <main>
         {/* Hero Section */}
-        <section className="relative py-20 md:py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-transparent z-10" />
-          <div className="absolute inset-0 opacity-30">
+        <section className="relative min-h-screen flex items-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent z-10" />
+          <div className="absolute inset-0">
             <img
               src={heroImage}
               alt="About LuxeWig"
@@ -23,48 +23,53 @@ const About = () => {
             />
           </div>
 
-          <div className="container-luxury relative z-20">
+          <div className="container-luxury relative z-20 pt-32">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
               className="max-w-3xl"
             >
-              <span className="inline-block text-gold-dark text-sm font-semibold tracking-wider uppercase mb-4">
-                Our Story
-              </span>
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium leading-tight mb-6">
-                Crafting Confidence,{' '}
-                <span className="text-gradient-gold">One Wig at a Time</span>
-              </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                At LuxeWig, we believe every woman deserves to feel beautiful and confident. 
-                Our journey began with a simple mission: to create wigs that don't just look 
-                natural, but feel like an extension of who you are.
+              <p className=" text-white text-7xl text-center font-semibold tracking-wider uppercase mb-4">
+                Notre Histoire
               </p>
+              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium leading-tight mb-6">
+                <p className='text-center text-white'>Créer la Confiance</p>
+                <span className="text-gradient-gold">Une Perruque à la Fois</span>
+              </h1>
+              <div className="text-center space-y-4">
+                <p className="text-xl text-white/90 leading-relaxed font-light">
+                  Chez <span className="text-gold font-medium">LuxeWig</span>, nous croyons que chaque femme mérite 
+                  de se sentir <span className="text-white font-medium">belle et confiante</span>.
+                </p>
+                <p className="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
+                  Notre voyage a commencé avec une mission simple : créer des perruques qui ne semblent pas seulement 
+                  naturelles, mais qui <em className="text-gold-light">se sentent comme une extension de qui vous êtes</em>.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* Values Section */}
-        <section className="section-padding bg-secondary/30">
+        <section className=" pt-20 bg-secondary/30">
           <div className="container-luxury">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
                   icon: Heart,
-                  title: 'Passion for Beauty',
-                  description: 'Every wig is crafted with love and attention to detail, ensuring you receive a product that exceeds expectations.',
+                  title: 'Passion pour la Beauté',
+                  description: 'Chaque perruque est confectionnée avec amour et attention aux détails, vous garantissant un produit qui dépasse vos attentes.',
                 },
                 {
                   icon: Award,
-                  title: 'Premium Quality',
-                  description: 'We source only the finest 100% Remy human hair and use advanced techniques for the most natural-looking wigs.',
+                  title: 'Qualité Premium',
+                  description: 'Nous sélectionnons uniquement les meilleurs cheveux humains 100% Remy et utilisons des techniques avancées pour des perruques au rendu le plus naturel.',
                 },
                 {
                   icon: Users,
-                  title: 'Customer First',
-                  description: 'Our dedicated team of stylists and support staff are here to guide you every step of your wig journey.',
+                  title: 'Client d\'Abord',
+                  description: 'Notre équipe dédiée de stylistes et de support est là pour vous guider à chaque étape de votre parcours perruque.',
                 },
               ].map((value, index) => (
                 <motion.div
@@ -96,29 +101,29 @@ const About = () => {
                 viewport={{ once: true }}
               >
                 <span className="inline-block text-gold-dark text-sm font-semibold tracking-wider uppercase mb-4">
-                  The Journey
+                  Le Parcours
                 </span>
                 <h2 className="font-serif text-4xl md:text-5xl font-medium mb-6">
-                  From Dream to <span className="text-gradient-gold">Reality</span>
+                  Du Rêve à la <span className="text-gradient-gold">Réalité</span>
                 </h2>
                 <div className="space-y-6 text-muted-foreground leading-relaxed">
                   <p>
-                    LuxeWig was born from a personal experience. Our founder, after struggling to 
-                    find quality wigs that looked and felt natural, decided to create her own solution.
+                    LuxeWig est né d'une expérience personnelle. Notre fondatrice, après avoir eu du mal à 
+                    trouver des perruques de qualité qui paraissaient et se sentaient naturelles, a décidé de créer sa propre solution.
                   </p>
                   <p>
-                    What started as a small operation has grown into a beloved brand trusted by 
-                    thousands of women worldwide. We've helped women going through medical treatments, 
-                    busy professionals looking for convenience, and style enthusiasts seeking versatility.
+                    Ce qui a commencé comme une petite opération s'est transformé en une marque bien-aimée à laquelle 
+                    font confiance des milliers de femmes dans le monde. Nous avons aidé des femmes suivant des traitements médicaux, 
+                    des professionnelles occupées recherchant la praticité, et des passionnées de style en quête de polyvalence.
                   </p>
                   <p>
-                    Today, every wig we create carries that same passion and attention to detail 
-                    that inspired our journey from the very beginning.
+                    Aujourd'hui, chaque perruque que nous créons porte cette même passion et attention aux détails 
+                    qui ont inspiré notre parcours depuis le tout début.
                   </p>
                 </div>
                 <Button asChild variant="luxury-outline" size="lg" className="mt-8">
                   <Link to="/shop" className="group">
-                    Explore Our Collection
+                    Découvrir Notre Collection
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
@@ -133,14 +138,9 @@ const About = () => {
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden">
                   <img
                     src={heroImage}
-                    alt="Our story"
+                    alt="Notre histoire"
                     className="w-full h-full object-cover"
                   />
-                </div>
-                <div className="absolute -bottom-8 -left-8 bg-gold text-primary p-8 rounded-2xl">
-                  <Sparkles className="h-8 w-8 mb-3" />
-                  <p className="font-serif text-3xl font-semibold">5,000+</p>
-                  <p className="text-primary/80">Happy Customers</p>
                 </div>
               </motion.div>
             </div>
@@ -148,7 +148,7 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="section-padding bg-primary text-primary-foreground">
+        <section className=" pb-20 bg-primary text-primary-foreground">
           <div className="container-luxury text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -157,14 +157,14 @@ const About = () => {
               className="max-w-3xl mx-auto"
             >
               <h2 className="font-serif text-4xl md:text-5xl font-medium mb-6">
-                Ready to Find Your Perfect Wig?
+                Prête à Trouver Votre Perruque Parfaite ?
               </h2>
               <p className="text-primary-foreground/70 text-lg mb-10">
-                Join thousands of confident women who trust LuxeWig for their hair transformation.
+                Rejoignez des milliers de femmes confiantes qui font confiance à LuxeWig pour leur transformation capillaire.
               </p>
-              <Button asChild variant="gold" size="hero">
+              <Button asChild variant="gold" size="hero" className='bg-[#e1b052] hover:bg-[#d89c2b]'>
                 <Link to="/shop" className="group">
-                  Shop Now
+                  Acheter Maintenant
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>

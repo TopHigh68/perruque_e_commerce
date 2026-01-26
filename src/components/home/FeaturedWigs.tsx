@@ -11,42 +11,42 @@ import wigProduct4 from '@/assets/wig-product-4.jpg';
 const featuredWigs = [
   {
     id: 1,
-    name: 'Silky Straight Noir',
-    type: 'Human Hair',
+    name: 'Lisse Soyeux Noir',
+    type: 'Cheveux Humains',
     price: 449,
     originalPrice: 549,
     rating: 4.9,
     reviews: 128,
     image: wigProduct1,
-    badge: 'Best Seller',
+    badge: 'Meilleure Vente',
     inStock: true,
   },
   {
     id: 2,
-    name: 'Auburn Curly Glamour',
-    type: 'Human Hair',
+    name: 'Boucles Auburn Glamour',
+    type: 'Cheveux Humains',
     price: 529,
     rating: 4.8,
     reviews: 96,
     image: wigProduct2,
-    badge: 'New Arrival',
+    badge: 'Nouveauté',
     inStock: true,
   },
   {
     id: 3,
-    name: 'Honey Blonde Waves',
-    type: 'Human Hair',
+    name: 'Ondulations Blond Miel',
+    type: 'Cheveux Humains',
     price: 599,
     rating: 5.0,
     reviews: 214,
     image: wigProduct3,
-    badge: 'Editor\'s Choice',
+    badge: 'Choix de l\'Éditeur',
     inStock: true,
   },
   {
     id: 4,
-    name: 'Natural Afro Queen',
-    type: 'Human Hair',
+    name: 'Afro Naturel Queen',
+    type: 'Cheveux Humains',
     price: 479,
     rating: 4.9,
     reviews: 87,
@@ -82,7 +82,7 @@ export function FeaturedWigs() {
             viewport={{ once: true }}
             className="inline-block text-gold-dark text-sm font-semibold tracking-wider uppercase mb-4"
           >
-            Curated for You
+            Sélectionné pour Vous
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -91,7 +91,7 @@ export function FeaturedWigs() {
             transition={{ delay: 0.1 }}
             className="font-serif text-4xl md:text-5xl font-medium mb-6"
           >
-            Featured <span className="text-gradient-gold">Collection</span>
+            Collection <span className="text-gradient-gold">Vedette</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -100,8 +100,8 @@ export function FeaturedWigs() {
             transition={{ delay: 0.2 }}
             className="text-muted-foreground max-w-2xl mx-auto text-lg"
           >
-            Discover our most loved wigs, handpicked for their exceptional quality, 
-            stunning design, and the confidence they inspire.
+            Découvrez nos perruques les plus aimées, sélectionnées pour leur qualité exceptionnelle, 
+            leur design époustouflant et la confiance qu'elles inspirent.
           </motion.p>
         </div>
 
@@ -144,7 +144,7 @@ export function FeaturedWigs() {
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
                     <Button variant="gold" size="lg" className="w-full">
                       <ShoppingBag className="h-4 w-4" />
-                      Add to Cart
+                      Ajouter au Panier
                     </Button>
                   </div>
                 </div>
@@ -179,10 +179,10 @@ export function FeaturedWigs() {
 
                   {/* Price */}
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-semibold">${wig.price}</span>
+                    <span className="text-lg font-semibold">{wig.price}€</span>
                     {wig.originalPrice && (
                       <span className="text-sm text-muted-foreground line-through">
-                        ${wig.originalPrice}
+                        {wig.originalPrice}€
                       </span>
                     )}
                   </div>
@@ -201,7 +201,7 @@ export function FeaturedWigs() {
         >
           <Button asChild variant="luxury-outline" size="lg">
             <Link to="/shop" className="group">
-              View All Wigs
+              Voir Toutes les Perruques
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>

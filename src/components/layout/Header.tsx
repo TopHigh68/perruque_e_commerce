@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Shop Wigs', path: '/shop' },
-  { name: 'About', path: '/about' },
+  { name: 'Accueil', path: '/' },
+  { name: 'Boutique', path: '/shop' },
+  { name: 'À propos', path: '/about' },
   { name: 'Contact', path: '/contact' },
 ];
 

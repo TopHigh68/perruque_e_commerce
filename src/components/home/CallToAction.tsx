@@ -19,7 +19,7 @@ export function CallToAction() {
               viewport={{ once: true }}
               className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium mb-6 text-foreground"
             >
-              Ready to Transform Your Look?
+              Prêt à Transformer Votre Look ?
             </motion.h2>
             
             <motion.p
@@ -29,8 +29,8 @@ export function CallToAction() {
               transition={{ delay: 0.1 }}
               className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
             >
-              Discover the perfect wig that matches your style and personality. 
-              Shop our collection or reserve your wig for a personalized experience.
+              Découvrez la perruque parfaite qui correspond à votre style et votre personnalité. 
+              Explorez notre collection ou réservez votre perruque pour une expérience personnalisée.
             </motion.p>
 
             <motion.div
@@ -43,14 +43,14 @@ export function CallToAction() {
               <Button asChild variant="hero" size="hero">
                 <Link to="/shop" className="group">
                   <ShoppingBag className="h-5 w-5" />
-                  Shop Collection
+                  Explorer la Collection
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
               <Button asChild variant="hero-secondary" size="hero">
                 <Link to="/shop?reserve=true">
                   <Calendar className="h-5 w-5" />
-                  Reserve a Wig
+                  Réserver une Perruque
                 </Link>
               </Button>
             </motion.div>

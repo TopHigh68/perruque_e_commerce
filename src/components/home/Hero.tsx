@@ -12,7 +12,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent z-10" />
         <img
           src={heroImage}
-          alt="Beautiful woman wearing luxury wig"
+          alt="Belle femme portant une perruque de luxe"
           className="w-full h-full object-cover object-center img-zoom"
         />
       </div>
@@ -35,16 +35,16 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="mb-6"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border text-sm font-medium" style={{
+            <span className="inline-flex text-white items-center gap-2 px-4 py-2 rounded-full glass border text-sm font-medium" style={{
               backgroundColor: 'hsl(var(--gold) / 0.1)',
               borderColor: 'hsl(var(--gold) / 0.3)',
-              color: 'hsl(var(--gold-dark))'
+              // color: 'hsl(var(--gold-dark))'
             }}>
-              <Star className="h-4 w-4" style={{
-                fill: 'hsl(var(--gold))',
+              <Star className="h-4 w-4 " style={{
+                fill: 'white',
                 color: 'hsl(var(--gold))'
               }} />
-              Premium Collection 2026
+              Collection Premium 2026
             </span>
           </motion.div>
 
@@ -52,11 +52,11 @@ export function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-tight mb-6"
+            className="font-serif text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-medium leading-tight mb-6"
             style={{ color: 'hsl(var(--foreground))' }}
           >
-            Reveal Your Beauty,{' '}
-            <span className="text-gradient-gold">One Wig at a Time</span>
+            <p className='text-center text-white'>Révélez Votre Beauté</p>
+            <span className="text-gradient-gold">Une Perruque à la Fois</span>
           </motion.h1>
 
           <motion.p
@@ -66,8 +66,8 @@ export function Hero() {
             className="text-lg md:text-xl mb-10 leading-relaxed max-w-xl text-white text-center"
             // style={{ color: 'hsl(var(--muted-foreground))' }}
           >
-            Experience luxury with our handcrafted wigs, designed for the modern woman 
-            who demands elegance, comfort, and flawless style.
+            Vivez le luxe avec nos perruques artisanales, conçues pour la femme moderne 
+            qui exige élégance, confort et style impeccable.
           </motion.p>
 
           <motion.div
@@ -86,7 +86,7 @@ export function Hero() {
               }}
             >
               <Link to="/shop" className="flex items-center justify-center gap-2">
-                Shop Wigs Now
+                Acheter Maintenant
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -100,7 +100,7 @@ export function Hero() {
               }}
             >
               <Link to="/shop?reserve=true" className="flex items-center justify-center gap-2">
-                Reserve Your Wig
+                Réserver Votre Perruque
               </Link>
             </Button>
           </motion.div>
@@ -136,7 +136,7 @@ export function Hero() {
               </div>
               <div className="text-sm">
                 <div className="font-semibold" style={{ color: 'hsl(var(--foreground))' }}>5,000+</div>
-                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>Happy Customers</div>
+                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>Clients Satisfaits</div>
               </div>
             </div>
             
@@ -151,7 +151,7 @@ export function Hero() {
               </div>
               <div className="text-sm ml-2">
                 <div className="font-semibold" style={{ color: 'hsl(var(--foreground))' }}>4.9/5</div>
-                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>Rating</div>
+                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>Note</div>
               </div>
             </div>
           </motion.div>

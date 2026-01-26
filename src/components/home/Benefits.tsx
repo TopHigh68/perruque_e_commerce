@@ -4,33 +4,33 @@ import { Truck, Shield, HeadphonesIcon, Sparkles, RefreshCw, Award } from 'lucid
 const benefits = [
   {
     icon: Truck,
-    title: 'Fast & Free Shipping',
-    description: 'Complimentary express shipping on orders over $200',
+    title: 'Livraison Rapide & Gratuite',
+    description: 'Livraison express gratuite sur les commandes de plus de 200€',
   },
   {
     icon: Shield,
-    title: 'Quality Guaranteed',
-    description: '100% premium human hair with natural look & feel',
+    title: 'Qualité Garantie',
+    description: '100% cheveux humains premium avec un aspect et toucher naturels',
   },
   {
     icon: HeadphonesIcon,
-    title: 'VIP Support',
-    description: 'Personal wig consultations with our expert stylists',
+    title: 'Support VIP',
+    description: 'Consultations personnalisées avec nos stylistes experts',
   },
   {
     icon: Sparkles,
-    title: 'Handcrafted Excellence',
-    description: 'Each wig is hand-tied for the most natural hairline',
+    title: 'Excellence Artisanale',
+    description: 'Chaque perruque est nouée à la main pour la ligne de cheveux la plus naturelle',
   },
   {
     icon: RefreshCw,
-    title: 'Easy Returns',
-    description: '30-day hassle-free returns on unworn wigs',
+    title: 'Retours Faciles',
+    description: 'Retours sans tracas sous 30 jours sur les perruques non portées',
   },
   {
     icon: Award,
-    title: 'Trusted by Thousands',
-    description: '5,000+ happy customers with 4.9 average rating',
+    title: 'Approuvé par des Milliers',
+    description: '5 000+ clients satisfaits avec une note moyenne de 4,9',
   },
 ];
 
@@ -60,7 +60,7 @@ export function Benefits() {
             viewport={{ once: true }}
             className="inline-block text-gold-dark text-sm font-semibold tracking-wider uppercase mb-4"
           >
-            Why Choose Us
+            Pourquoi Nous Choisir
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -69,7 +69,7 @@ export function Benefits() {
             transition={{ delay: 0.1 }}
             className="font-serif text-4xl md:text-5xl font-medium"
           >
-            The <span className="text-gradient-gold">LuxeWig</span> Promise
+            La Promesse <span className="text-gradient-gold">LuxeWig</span>
           </motion.h2>
         </div>
 

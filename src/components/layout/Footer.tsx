@@ -5,22 +5,22 @@ import { Input } from '@/components/ui/input';
 
 const footerLinks = {
   shop: [
-    { name: 'Human Hair Wigs', path: '/shop?type=human' },
-    { name: 'Synthetic Wigs', path: '/shop?type=synthetic' },
-    { name: 'New Arrivals', path: '/shop?sort=new' },
-    { name: 'Best Sellers', path: '/shop?sort=bestseller' },
+    { name: 'Perruques Cheveux Humains', path: '/shop?type=human' },
+    { name: 'Perruques Synthétiques', path: '/shop?type=synthetic' },
+    { name: 'Nouveautés', path: '/shop?sort=new' },
+    { name: 'Meilleures Ventes', path: '/shop?sort=bestseller' },
   ],
   support: [
     { name: 'FAQ', path: '/faq' },
-    { name: 'Wig Care Guide', path: '/care-guide' },
-    { name: 'Shipping Info', path: '/shipping' },
-    { name: 'Returns & Exchanges', path: '/returns' },
+    { name: 'Guide d\'Entretien', path: '/care-guide' },
+    { name: 'Infos Livraison', path: '/shipping' },
+    { name: 'Retours & Échanges', path: '/returns' },
   ],
   company: [
-    { name: 'About Us', path: '/about' },
+    { name: 'À Propos', path: '/about' },
     { name: 'Contact', path: '/contact' },
     { name: 'Blog', path: '/blog' },
-    { name: 'Careers', path: '/careers' },
+    { name: 'Carrières', path: '/careers' },
   ],
 };
 
@@ -33,25 +33,37 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-black text-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_hsl(var(--gold))_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_hsl(var(--gold))_0%,_transparent_50%)]" />
+      </div>
+
       {/* Newsletter Section */}
-      <div className="border-b border-primary-foreground/10">
-        <div className="container-luxury py-16">
+      <div className="relative z-10 border-b border-white/10">
+        <div className="container-luxury py-12">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="font-serif text-3xl md:text-4xl font-medium mb-4">
-              Join the LuxeWig Family
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark mb-4">
+              <Mail className="h-6 w-6 text-black" />
+            </div>
+            <h3 className="font-serif text-2xl md:text-3xl font-medium mb-4 bg-gradient-to-r from-white via-gold to-white bg-clip-text text-transparent">
+              Rejoignez la Famille LuxeWig
             </h3>
-            <p className="text-primary-foreground/70 mb-8">
-              Subscribe for exclusive offers, new arrivals, and wig care tips delivered to your inbox.
+            <p className="text-white/70 mb-6 leading-relaxed">
+              Abonnez-vous pour des offres exclusives et conseils d'entretien.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <Input
                 type="email"
-                placeholder="Enter your email"
-                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 h-12"
+                placeholder="Entrez votre email"
+                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-12 rounded-full px-4 backdrop-blur-sm focus:bg-white/15 focus:border-gold"
               />
-              <Button variant="gold" size="lg" className="whitespace-nowrap">
-                Subscribe
+              <Button 
+                size="lg" 
+                className="h-12 px-6 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-black font-semibold rounded-full transition-all duration-300 hover:scale-105"
+              >
+                S'abonner
               </Button>
             </div>
           </div>
@@ -59,28 +71,27 @@ export function Footer() {
       </div>
 
       {/* Main Footer */}
-      <div className="container-luxury py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+      <div className="relative z-10 container-luxury py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-6">
-              <span className="font-serif text-3xl font-semibold tracking-tight">
-                Luxe<span className="text-gold">Wig</span>
+            <Link to="/" className="inline-block mb-4">
+              <span className="font-serif text-2xl font-semibold tracking-tight">
+                Luxe<span className="text-gradient-gold">Wig</span>
               </span>
             </Link>
-            <p className="text-primary-foreground/70 mb-6 max-w-sm leading-relaxed">
-              Premium quality wigs crafted for confidence. Each wig is designed to help you reveal 
-              your most beautiful self, one strand at a time.
+            <p className="text-white/70 mb-6 max-w-sm leading-relaxed">
+              Perruques de qualité premium conçues pour la confiance.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-full border border-primary-foreground/20 flex items-center justify-center transition-all hover:bg-gold hover:border-gold hover:text-primary"
+                  className="group w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-gradient-to-br hover:from-gold hover:to-gold-dark hover:border-gold hover:scale-110 backdrop-blur-sm"
                 >
-                  <social.icon className="h-5 w-5" />
+                  <social.icon className="h-4 w-4 text-white group-hover:text-black transition-colors" />
                 </a>
               ))}
             </div>
@@ -88,13 +99,16 @@ export function Footer() {
 
           {/* Shop Links */}
           <div>
-            <h4 className="font-serif text-lg font-medium mb-6">Shop</h4>
-            <ul className="space-y-4">
+            <h4 className="font-serif text-lg font-medium mb-4 text-gold relative">
+              Boutique
+              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-gradient-to-r from-gold to-transparent"></div>
+            </h4>
+            <ul className="space-y-2">
               {footerLinks.shop.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-primary-foreground/70 hover:text-gold transition-colors"
+                    className="text-white/70 hover:text-gold transition-all duration-300 hover:translate-x-1 inline-block text-sm"
                   >
                     {link.name}
                   </Link>
@@ -105,13 +119,16 @@ export function Footer() {
 
           {/* Support Links */}
           <div>
-            <h4 className="font-serif text-lg font-medium mb-6">Support</h4>
-            <ul className="space-y-4">
+            <h4 className="font-serif text-lg font-medium mb-4 text-gold relative">
+              Aide
+              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-gradient-to-r from-gold to-transparent"></div>
+            </h4>
+            <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-primary-foreground/70 hover:text-gold transition-colors"
+                    className="text-white/70 hover:text-gold transition-all duration-300 hover:translate-x-1 inline-block text-sm"
                   >
                     {link.name}
                   </Link>
@@ -122,21 +139,29 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-serif text-lg font-medium mb-6">Contact</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Mail className="h-5 w-5 text-gold mt-0.5" />
-                <span className="text-primary-foreground/70">hello@luxewig.com</span>
+            <h4 className="font-serif text-lg font-medium mb-4 text-gold relative">
+              Contact
+              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-gradient-to-r from-gold to-transparent"></div>
+            </h4>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3 group">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
+                  <Mail className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
+                </div>
+                <span className="text-white/70 group-hover:text-white transition-colors text-sm">hello@luxewig.com</span>
               </li>
-              <li className="flex items-start gap-3">
-                <Phone className="h-5 w-5 text-gold mt-0.5" />
-                <span className="text-primary-foreground/70">+1 (888) 555-0199</span>
+              <li className="flex items-start gap-3 group">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
+                  <Phone className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
+                </div>
+                <span className="text-white/70 group-hover:text-white transition-colors text-sm">+33 1 23 45 67 89</span>
               </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-gold mt-0.5" />
-                <span className="text-primary-foreground/70">
-                  123 Beauty Lane, Suite 100<br />
-                  Los Angeles, CA 90001
+              <li className="flex items-start gap-3 group">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
+                  <MapPin className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
+                </div>
+                <span className="text-white/70 group-hover:text-white transition-colors text-sm">
+                  Paris, France
                 </span>
               </li>
             </ul>
@@ -145,18 +170,23 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/10">
-        <div className="container-luxury py-6">
+      <div className="relative z-10 border-t border-white/10 bg-black/50 backdrop-blur-sm">
+        <div className="container-luxury py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-primary-foreground/50 text-sm">
-              © 2024 LuxeWig. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm text-primary-foreground/50">
-              <Link to="/privacy" className="hover:text-gold transition-colors">
-                Privacy Policy
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
+                <span className="text-black font-bold text-xs">©</span>
+              </div>
+              <p className="text-white/60 text-xs">
+                2024 LuxeWig. Tous droits réservés.
+              </p>
+            </div>
+            <div className="flex gap-6 text-xs">
+              <Link to="/privacy" className="text-white/60 hover:text-gold transition-all duration-300">
+                Confidentialité
               </Link>
-              <Link to="/terms" className="hover:text-gold transition-colors">
-                Terms of Service
+              <Link to="/terms" className="text-white/60 hover:text-gold transition-all duration-300">
+                Conditions
               </Link>
             </div>
           </div>

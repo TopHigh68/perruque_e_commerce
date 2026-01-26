@@ -5,26 +5,26 @@ const testimonials = [
   {
     id: 1,
     name: 'Michelle Thompson',
-    role: 'Verified Buyer',
-    content: 'The quality is absolutely incredible. This wig looks so natural that even my closest friends couldn\'t tell the difference. I\'ve received so many compliments!',
+    role: 'Acheteur Vérifié',
+    content: 'La qualité est absolument incroyable. Cette perruque a l\'air si naturelle que même mes amis les plus proches ne pouvaient pas faire la différence. J\'ai reçu tellement de compliments !',
     rating: 5,
-    wigPurchased: 'Honey Blonde Waves',
+    wigPurchased: 'Ondulations Blond Miel',
   },
   {
     id: 2,
     name: 'Jasmine Williams',
-    role: 'Verified Buyer',
-    content: 'LuxeWig has completely transformed my confidence. The lace front is undetectable, and the hair moves so beautifully. Worth every penny!',
+    role: 'Acheteur Vérifié',
+    content: 'LuxeWig a complètement transformé ma confiance. Le lace front est indétectable, et les cheveux bougent si magnifiquement. Ça vaut chaque centime !',
     rating: 5,
-    wigPurchased: 'Silky Straight Noir',
+    wigPurchased: 'Lisse Soyeux Noir',
   },
   {
     id: 3,
     name: 'Aisha Johnson',
-    role: 'Verified Buyer',
-    content: 'I was nervous about ordering online, but the VIP support team walked me through everything. The wig arrived perfectly styled and ready to wear.',
+    role: 'Acheteur Vérifié',
+    content: 'J\'avais peur de commander en ligne, mais l\'équipe de support VIP m\'a guidée dans tout le processus. La perruque est arrivée parfaitement coiffée et prête à porter.',
     rating: 5,
-    wigPurchased: 'Natural Afro Queen',
+    wigPurchased: 'Afro Naturel Queen',
   },
 ];
 
@@ -44,7 +44,7 @@ export function Testimonials() {
             viewport={{ once: true }}
             className="inline-block text-gold text-sm font-semibold tracking-wider uppercase mb-4"
           >
-            Real Stories
+            Histoires Réelles
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -53,7 +53,7 @@ export function Testimonials() {
             transition={{ delay: 0.1 }}
             className="font-serif text-4xl md:text-5xl font-medium"
           >
-            Loved by <span className="text-gold">Thousands</span>
+            Aimé par des <span className="text-gold">Milliers</span>
           </motion.h2>
         </div>
 
