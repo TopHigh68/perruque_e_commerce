@@ -35,8 +35,8 @@ const allWigs = [
     texture: 'Lisse',
     length: '45cm',
     color: 'Noir',
-    price: 449,
-    originalPrice: 549,
+    price: 294350,
+    originalPrice: 359650,
     rating: 4.9,
     reviews: 128,
     image: wigProduct1,
@@ -50,7 +50,7 @@ const allWigs = [
     texture: 'Bouclé',
     length: '40cm',
     color: 'Auburn',
-    price: 529,
+    price: 346870,
     rating: 4.8,
     reviews: 96,
     image: wigProduct2,
@@ -64,7 +64,7 @@ const allWigs = [
     texture: 'Ondulé',
     length: '55cm',
     color: 'Blond',
-    price: 599,
+    price: 392730,
     rating: 5.0,
     reviews: 214,
     image: wigProduct3,
@@ -78,7 +78,7 @@ const allWigs = [
     texture: 'Crépu',
     length: '35cm',
     color: 'Noir',
-    price: 479,
+    price: 313990,
     rating: 4.9,
     reviews: 87,
     image: wigProduct4,
@@ -91,7 +91,7 @@ const allWigs = [
     texture: 'Lisse',
     length: '30cm',
     color: 'Noir',
-    price: 189,
+    price: 123895,
     rating: 4.7,
     reviews: 156,
     image: wigProduct1,
@@ -104,7 +104,7 @@ const allWigs = [
     texture: 'Ondulé',
     length: '50cm',
     color: 'Ombré',
-    price: 549,
+    price: 359595,
     rating: 4.8,
     reviews: 92,
     image: wigProduct3,
@@ -117,7 +117,7 @@ const allWigs = [
     texture: 'Bouclé',
     length: '45cm',
     color: 'Bordeaux',
-    price: 489,
+    price: 320295,
     rating: 4.9,
     reviews: 73,
     image: wigProduct2,
@@ -131,7 +131,7 @@ const allWigs = [
     texture: 'Crépu',
     length: '40cm',
     color: 'Noir',
-    price: 459,
+    price: 300645,
     rating: 4.8,
     reviews: 64,
     image: wigProduct4,
@@ -162,7 +162,7 @@ const Shop = () => {
     texture: [],
     length: [],
     color: [],
-    priceRange: [0, 700],
+    priceRange: [0, 458500],
   });
   const [sortBy, setSortBy] = useState('featured');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -243,13 +243,13 @@ const Shop = () => {
         <Slider
           value={filters.priceRange}
           onValueChange={(value) => setFilters((prev) => ({ ...prev, priceRange: value as [number, number] }))}
-          max={700}
+          max={458500}
           step={10}
           className="mb-2"
         />
         <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{filters.priceRange[0]}€</span>
-          <span>{filters.priceRange[1]}€</span>
+          <span>{filters.priceRange[0].toLocaleString()} FCFA</span>
+          <span>{filters.priceRange[1].toLocaleString()} FCFA</span>
         </div>
       </div>
 
@@ -262,7 +262,7 @@ const Shop = () => {
             texture: [],
             length: [],
             color: [],
-            priceRange: [0, 700],
+            priceRange: [0, 458500],
           })
         }
       >
@@ -377,7 +377,7 @@ const Shop = () => {
                           />
                           
                           {wig.badge && (
-                            <Badge className="absolute top-4 left-4 bg-gold text-primary border-0 font-semibold">
+                            <Badge className="absolute top-4 left-4 bg-gold text-white border-0 font-semibold">
                               {wig.badge}
                             </Badge>
                           )}
@@ -390,13 +390,13 @@ const Shop = () => {
                             </div>
                           )}
 
-                          <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-background hover:scale-110">
-                            <Heart className="h-5 w-5" />
+                          <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-black/80 hover:scale-110">
+                            <Heart className="h-5 w-5 text-white" />
                           </button>
 
                           {wig.inStock && (
-                            <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                              <Button variant="gold" size="lg" className="w-full">
+                            <div className="absolute bottom-4 flex justify-center  left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                              <Button variant="gold" size="lg" className=" w-[70%]  bg-[#e1b052] hover:bg-[#d89c2b] cursor-pointer text-white">
                                 <ShoppingBag className="h-4 w-4" />
                                 Ajouter au Panier
                               </Button>
@@ -437,10 +437,10 @@ const Shop = () => {
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-lg font-semibold">{wig.price}€</span>
+                            <span className="text-lg font-semibold">{wig.price.toLocaleString()} FCFA</span>
                             {wig.originalPrice && (
                               <span className="text-sm text-muted-foreground line-through">
-                                {wig.originalPrice}€
+                                {wig.originalPrice.toLocaleString()} FCFA
                               </span>
                             )}
                           </div>
@@ -464,7 +464,7 @@ const Shop = () => {
                         texture: [],
                         length: [],
                         color: [],
-                        priceRange: [0, 700],
+                        priceRange: [0, 458500],
                       })
                     }
                   >

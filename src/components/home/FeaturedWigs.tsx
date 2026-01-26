@@ -13,8 +13,8 @@ const featuredWigs = [
     id: 1,
     name: 'Lisse Soyeux Noir',
     type: 'Cheveux Humains',
-    price: 449,
-    originalPrice: 549,
+    price: 294350,
+    originalPrice: 359650,
     rating: 4.9,
     reviews: 128,
     image: wigProduct1,
@@ -25,7 +25,7 @@ const featuredWigs = [
     id: 2,
     name: 'Boucles Auburn Glamour',
     type: 'Cheveux Humains',
-    price: 529,
+    price: 346870,
     rating: 4.8,
     reviews: 96,
     image: wigProduct2,
@@ -36,7 +36,7 @@ const featuredWigs = [
     id: 3,
     name: 'Ondulations Blond Miel',
     type: 'Cheveux Humains',
-    price: 599,
+    price: 392730,
     rating: 5.0,
     reviews: 214,
     image: wigProduct3,
@@ -47,7 +47,7 @@ const featuredWigs = [
     id: 4,
     name: 'Afro Naturel Queen',
     type: 'Cheveux Humains',
-    price: 479,
+    price: 313990,
     rating: 4.9,
     reviews: 87,
     image: wigProduct4,
@@ -130,19 +130,19 @@ export function FeaturedWigs() {
                   
                   {/* Badge */}
                   {wig.badge && (
-                    <Badge className="absolute top-4 left-4 bg-gold text-primary border-0 font-semibold">
+                    <Badge className="absolute top-4 left-4 bg-gold text-white border-0 font-semibold">
                       {wig.badge}
                     </Badge>
                   )}
 
                   {/* Wishlist Button */}
-                  <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-background hover:scale-110">
-                    <Heart className="h-5 w-5" />
+                  <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-black/80 hover:scale-110">
+                    <Heart className="h-5 w-5 text-white" />
                   </button>
 
                   {/* Quick Add */}
-                  <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                    <Button variant="gold" size="lg" className="w-full">
+                  <div className="absolute bottom-4  left-4 right-4  flex justify-center opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                    <Button variant="gold" size="lg" className=" w-[70%] bg-[#e1b052] rounded-xl hover:bg-[#d89c2b] cursor-pointer text-white">
                       <ShoppingBag className="h-4 w-4" />
                       Ajouter au Panier
                     </Button>
@@ -179,10 +179,10 @@ export function FeaturedWigs() {
 
                   {/* Price */}
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-semibold">{wig.price}€</span>
+                    <span className="text-lg font-semibold">{wig.price.toLocaleString()} FCFA</span>
                     {wig.originalPrice && (
                       <span className="text-sm text-muted-foreground line-through">
-                        {wig.originalPrice}€
+                        {wig.originalPrice.toLocaleString()} FCFA
                       </span>
                     )}
                   </div>
