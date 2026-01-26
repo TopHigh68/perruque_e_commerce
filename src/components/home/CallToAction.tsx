@@ -41,14 +41,14 @@ export function CallToAction() {
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Button asChild variant="hero" size="hero">
-                <Link to="/shop" className="group">
+                <Link to="/shop" className="group flex items-center  hover:text-[#e1b052] justify-center gap-2">
                   <ShoppingBag className="h-5 w-5" />
                   Explorer la Collection
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-              <Button asChild variant="hero-secondary" size="hero">
-                <Link to="/shop?reserve=true">
+              <Button asChild variant="hero-secondary" size="hero" className='bg-[#e1b052] hover:bg-[#d89c2b]'>
+                <Link to="/shop?reserve=true" className="group flex items-center justify-center gap-2 ">
                   <Calendar className="h-5 w-5" />
                   Réserver une Perruque
                 </Link>
