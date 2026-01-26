@@ -1,0 +1,100 @@
+import { motion } from 'framer-motion';
+import { Truck, Shield, HeadphonesIcon, Sparkles, RefreshCw, Award } from 'lucide-react';
+
+const benefits = [
+  {
+    icon: Truck,
+    title: 'Fast & Free Shipping',
+    description: 'Complimentary express shipping on orders over $200',
+  },
+  {
+    icon: Shield,
+    title: 'Quality Guaranteed',
+    description: '100% premium human hair with natural look & feel',
+  },
+  {
+    icon: HeadphonesIcon,
+    title: 'VIP Support',
+    description: 'Personal wig consultations with our expert stylists',
+  },
+  {
+    icon: Sparkles,
+    title: 'Handcrafted Excellence',
+    description: 'Each wig is hand-tied for the most natural hairline',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Easy Returns',
+    description: '30-day hassle-free returns on unworn wigs',
+  },
+  {
+    icon: Award,
+    title: 'Trusted by Thousands',
+    description: '5,000+ happy customers with 4.9 average rating',
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+export function Benefits() {
+  return (
+    <section className="section-padding">
+      <div className="container-luxury">
+        <div className="text-center mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block text-gold-dark text-sm font-semibold tracking-wider uppercase mb-4"
+          >
+            Why Choose Us
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-serif text-4xl md:text-5xl font-medium"
+          >
+            The <span className="text-gradient-gold">LuxeWig</span> Promise
+          </motion.h2>
+        </div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {benefits.map((benefit, index) => (
+            <motion.div
+              key={benefit.title}
+              variants={itemVariants}
+              className="group relative p-8 rounded-2xl bg-card border border-border/50 hover:border-gold/30 transition-all duration-500 hover:shadow-soft"
+            >
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gold/20 to-champagne flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                <benefit.icon className="h-7 w-7 text-gold-dark" />
+              </div>
+              <h3 className="font-serif text-xl font-medium mb-3">{benefit.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
