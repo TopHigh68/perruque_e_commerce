@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-model-1.jpg';
+import profile1 from '@/assets/badgeProfil/photo-1534528741775-53994a69daeb.jpg';
+import profile2 from '@/assets/badgeProfil/photo-1438761681033-6461ffad8d80.jpg';
+import profile3 from '@/assets/badgeProfil/photo-1472099645785-5658abf4ff4e.jpg';
+import profile4 from '@/assets/badgeProfil/photo-1507003211169-0a1dd7228f2d.jpg';
 
 export function Hero() {
   return (
@@ -114,29 +118,37 @@ export function Hero() {
           >
             <div className="flex items-center gap-3">
               <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
+                {[
+                  profile1,
+                  profile2,
+                  profile3,
+                  profile4
+                ].map((src, i) => (
                   <div
                     key={i}
-                    className="w-10 h-10 rounded-full border-2 shadow-sm"
-                    style={{
-                      borderColor: 'hsl(var(--background))',
-                      background: 'linear-gradient(135deg, hsl(var(--champagne)), hsl(var(--gold) / 0.3))'
-                    }}
-                  />
+                    className="w-10 h-10 rounded-full border-2 shadow-lg overflow-hidden"
+                    style={{ borderColor: 'hsl(var(--gold))' }}
+                  >
+                    <img 
+                      src={src} 
+                      alt={`Client ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 ))}
                 <div 
-                  className="w-10 h-10 rounded-full border-2 flex items-center justify-center"
+                  className="w-10 h-10 rounded-full border-2 flex items-center justify-center shadow-lg"
                   style={{
-                    borderColor: 'hsl(var(--background))',
-                    backgroundColor: 'hsl(var(--primary) / 0.1)'
+                    borderColor: 'hsl(var(--gold))',
+                    backgroundColor: 'hsl(var(--gold) / 0.9)'
                   }}
                 >
-                  <span className="text-xs font-bold" style={{ color: 'hsl(var(--primary))' }}>+</span>
+                  <span className="text-xs font-bold text-white">+</span>
                 </div>
               </div>
               <div className="text-sm">
-                <div className="font-semibold" style={{ color: 'hsl(var(--foreground))' }}>5,000+</div>
-                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>Clients Satisfaits</div>
+                <div className="font-semibold text-white">5,000+</div>
+                <div className="text-xs text-white/80">Clients Satisfaites</div>
               </div>
             </div>
             
@@ -150,8 +162,8 @@ export function Hero() {
                 ))}
               </div>
               <div className="text-sm ml-2">
-                <div className="font-semibold" style={{ color: 'hsl(var(--foreground))' }}>4.9/5</div>
-                <div className="text-xs" style={{ color: 'hsl(var(--muted-foreground))' }}>Note</div>
+                <div className="font-semibold text-white">4.9/5</div>
+                <div className="text-xs text-white/80">Note Moyenne</div>
               </div>
             </div>
           </motion.div>
