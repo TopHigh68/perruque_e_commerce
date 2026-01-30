@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
@@ -13,19 +13,10 @@ const navLinks = [
   { name: 'Contact', path: '/contact' },
 ];
 
-export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
+export function FixedHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { toggleCart, totalItems } = useCart();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -33,21 +24,11 @@ export function Header() {
 
   return (
     <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          isScrolled
-            ? 'glass border-b border-border/50 shadow-soft py-3'
-            : 'bg-transparent py-5'
-        )}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50 shadow-soft py-3 transition-all duration-500">
         <div className="container-luxury flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <span className={cn(
-              "font-serif text-2xl md:text-3xl font-semibold tracking-tight transition-colors",
-              isScrolled ? "text-foreground" : "text-white"
-            )}>
+            <span className="font-serif text-2xl md:text-3xl font-semibold tracking-tight text-foreground transition-colors">
               Luxe<span className="text-gradient-gold">Wig</span>
             </span>
           </Link>
@@ -61,8 +42,8 @@ export function Header() {
                 className={cn(
                   'link-underline text-sm font-medium tracking-wide transition-colors',
                   location.pathname === link.path
-                    ? isScrolled ? 'text-foreground' : 'text-white'
-                    : isScrolled ? 'text-muted-foreground hover:text-foreground' : 'text-white/80 hover:text-white'
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
                 )}
               >
                 {link.name}
@@ -75,15 +56,12 @@ export function Header() {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={cn(
-                "relative cursor-pointer transition-colors",
-                isScrolled ? "text-foreground hover:text-foreground/80" : "text-white hover:text-white/80"
-              )}
+              className="relative text-foreground cursor-pointer hover:text-foreground/80 transition-colors"
               onClick={toggleCart}
             >
-              <ShoppingBag className="h-5 w-5 cursor-pointer" />
+              <ShoppingBag className="h-5 w-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1  -right-1 w-5 h-5 bg-gold rounded-full text-xs font-semibold flex items-center justify-center text-primary">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gold rounded-full text-xs font-semibold flex items-center justify-center text-primary">
                   {totalItems}
                 </span>
               )}
@@ -93,10 +71,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className={cn(
-                "lg:hidden transition-colors",
-                isScrolled ? "text-foreground hover:text-foreground/80" : "text-white hover:text-white/80"
-              )}
+              className="lg:hidden text-foreground hover:text-foreground/80 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

@@ -5,7 +5,7 @@ const benefits = [
   {
     icon: Truck,
     title: 'Livraison Rapide & Gratuite',
-    description: 'Livraison express gratuite sur les commandes de plus de 200€',
+    description: 'Livraison express gratuite sur les commandes de plus de 200000 FCFA',
   },
   {
     icon: Shield,
@@ -51,7 +51,7 @@ const itemVariants = {
 
 export function Benefits() {
   return (
-    <section className="section-padding">
+    <section className="">
       <div className="container-luxury">
         <div className="text-center mb-16">
           <motion.span

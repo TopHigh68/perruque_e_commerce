@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Heart, ShoppingBag, Star, SlidersHorizontal, X, ChevronDown, Menu, Search, User } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { FixedHeader } from '@/components/layout/FixedHeader';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
+import { useCart } from '@/contexts/CartContext';
 import {
   Sheet,
   SheetContent,
@@ -39,9 +41,12 @@ const allWigs = [
     originalPrice: 359650,
     rating: 4.9,
     reviews: 128,
-    image: wigProduct1,
+    image: '/perruques/perruque1.jpg',
     badge: 'Meilleure Vente',
     inStock: true,
+    category: 'bestseller',
+    sales: 245,
+    createdAt: '2024-01-01'
   },
   {
     id: 2,
@@ -53,9 +58,12 @@ const allWigs = [
     price: 346870,
     rating: 4.8,
     reviews: 96,
-    image: wigProduct2,
+    image: '/perruques/perruque2.jpg',
     badge: 'Nouveauté',
     inStock: true,
+    category: 'new',
+    sales: 45,
+    createdAt: '2024-01-15'
   },
   {
     id: 3,
@@ -67,9 +75,12 @@ const allWigs = [
     price: 392730,
     rating: 5.0,
     reviews: 214,
-    image: wigProduct3,
+    image: '/perruques/perruque3.jpg',
     badge: 'Choix de l\'Éditeur',
     inStock: true,
+    category: 'bestseller',
+    sales: 189,
+    createdAt: '2023-12-20'
   },
   {
     id: 4,
@@ -81,25 +92,31 @@ const allWigs = [
     price: 313990,
     rating: 4.9,
     reviews: 87,
-    image: wigProduct4,
+    image: '/perruques/perruque4.jpg',
     inStock: true,
+    category: 'regular',
+    sales: 67,
+    createdAt: '2023-11-10'
   },
   {
     id: 5,
-    name: 'Bob Classique Noir',
-    type: 'Synthétique',
+    name: 'Bob Classique Châtain',
+    type: 'Cheveux Humains',
     texture: 'Lisse',
     length: '30cm',
-    color: 'Noir',
-    price: 123895,
+    color: 'Châtain',
+    price: 267890,
     rating: 4.7,
     reviews: 156,
-    image: wigProduct1,
+    image: '/perruques/perruque5.jpg',
     inStock: true,
+    category: 'regular',
+    sales: 98,
+    createdAt: '2023-10-15'
   },
   {
     id: 6,
-    name: 'Élégance Ombré',
+    name: 'Élégance Ombré Caramel',
     type: 'Cheveux Humains',
     texture: 'Ondulé',
     length: '50cm',
@@ -107,8 +124,12 @@ const allWigs = [
     price: 359595,
     rating: 4.8,
     reviews: 92,
-    image: wigProduct3,
+    image: '/perruques/perruque6.jpg',
+    badge: 'Tendance',
     inStock: false,
+    category: 'outofstock',
+    sales: 134,
+    createdAt: '2023-12-05'
   },
   {
     id: 7,
@@ -120,9 +141,12 @@ const allWigs = [
     price: 320295,
     rating: 4.9,
     reviews: 73,
-    image: wigProduct2,
+    image: '/perruques/perruque7.jpg',
     badge: 'Édition Limitée',
     inStock: true,
+    category: 'new',
+    sales: 23,
+    createdAt: '2024-01-10'
   },
   {
     id: 8,
@@ -134,16 +158,85 @@ const allWigs = [
     price: 300645,
     rating: 4.8,
     reviews: 64,
-    image: wigProduct4,
-    inStock: true,
+    image: '/perruques/perruque1.jpg',
+    inStock: false,
+    category: 'outofstock',
+    sales: 156,
+    createdAt: '2023-09-20'
   },
+  {
+    id: 9,
+    name: 'Lisse Premium Platine',
+    type: 'Cheveux Humains',
+    texture: 'Lisse',
+    length: '60cm',
+    color: 'Platine',
+    price: 425750,
+    rating: 4.9,
+    reviews: 89,
+    image: '/perruques/perruque2.jpg',
+    badge: 'Premium',
+    inStock: true,
+    category: 'new',
+    sales: 34,
+    createdAt: '2024-01-20'
+  },
+  {
+    id: 10,
+    name: 'Waves Naturelles Miel',
+    type: 'Cheveux Humains',
+    texture: 'Ondulé',
+    length: '42cm',
+    color: 'Miel',
+    price: 298450,
+    rating: 4.6,
+    reviews: 112,
+    image: '/perruques/perruque3.jpg',
+    inStock: true,
+    category: 'regular',
+    sales: 78,
+    createdAt: '2023-11-25'
+  },
+  {
+    id: 11,
+    name: 'Curly Volumineux Acajou',
+    type: 'Cheveux Humains',
+    texture: 'Bouclé',
+    length: '38cm',
+    color: 'Acajou',
+    price: 334890,
+    rating: 4.8,
+    reviews: 95,
+    image: '/perruques/perruque4.jpg',
+    inStock: true,
+    category: 'bestseller',
+    sales: 167,
+    createdAt: '2023-12-10'
+  },
+  {
+    id: 12,
+    name: 'Pixie Moderne Noir Jais',
+    type: 'Cheveux Humains',
+    texture: 'Lisse',
+    length: '25cm',
+    color: 'Noir',
+    price: 245670,
+    rating: 4.5,
+    reviews: 78,
+    image: '/perruques/perruque5.jpg',
+    inStock: true,
+    category: 'regular',
+    sales: 56,
+    createdAt: '2023-10-30'
+  }
 ];
 
 const filterOptions = {
   type: ['Cheveux Humains', 'Synthétique'],
   texture: ['Lisse', 'Bouclé', 'Ondulé', 'Crépu'],
-  length: ['30cm', '35cm', '40cm', '45cm', '50cm', '55cm'],
-  color: ['Noir', 'Auburn', 'Blond', 'Bordeaux', 'Ombré'],
+  length: ['25cm', '30cm', '35cm', '38cm', '40cm', '42cm', '45cm', '50cm', '55cm', '60cm'],
+  color: ['Noir', 'Auburn', 'Blond', 'Bordeaux', 'Ombré', 'Châtain', 'Platine', 'Miel', 'Acajou'],
+  category: ['Nouveautés', 'Meilleures Ventes', 'Épuisé']
 };
 
 type FilterKey = keyof typeof filterOptions;
@@ -153,6 +246,7 @@ interface Filters {
   texture: string[];
   length: string[];
   color: string[];
+  category: string[];
   priceRange: [number, number];
 }
 
@@ -162,10 +256,12 @@ const Shop = () => {
     texture: [],
     length: [],
     color: [],
+    category: [],
     priceRange: [0, 458500],
   });
   const [sortBy, setSortBy] = useState('featured');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const { addItem } = useCart();
 
   const toggleFilter = (category: FilterKey, value: string) => {
     setFilters((prev) => ({
@@ -182,50 +278,84 @@ const Shop = () => {
     if (filters.length.length && !filters.length.includes(wig.length)) return false;
     if (filters.color.length && !filters.color.includes(wig.color)) return false;
     if (wig.price < filters.priceRange[0] || wig.price > filters.priceRange[1]) return false;
+    
+    // Filtre par catégorie
+    if (filters.category.length) {
+      const hasMatchingCategory = filters.category.some(cat => {
+        if (cat === 'Nouveautés') return wig.category === 'new';
+        if (cat === 'Meilleures Ventes') return wig.category === 'bestseller';
+        if (cat === 'Épuisé') return wig.category === 'outofstock';
+        return false;
+      });
+      if (!hasMatchingCategory) return false;
+    }
+    
     return true;
   });
 
-  const sortedWigs = [...filteredWigs].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price;
-      case 'price-high':
-        return b.price - a.price;
-      case 'rating':
-        return b.rating - a.rating;
-      case 'new':
-        return b.id - a.id;
-      default:
-        return 0;
-    }
-  });
+  // Grouper les perruques par catégorie pour l'affichage
+  const groupedWigs = {
+    new: filteredWigs.filter(wig => wig.category === 'new'),
+    bestseller: filteredWigs.filter(wig => wig.category === 'bestseller'),
+    regular: filteredWigs.filter(wig => wig.category === 'regular'),
+    outofstock: filteredWigs.filter(wig => wig.category === 'outofstock')
+  };
+
+  const categoryTitles = {
+    new: 'Nouveautés',
+    bestseller: 'Meilleures Ventes',
+    regular: 'Autres Produits',
+    outofstock: 'Épuisé'
+  };
+
+  const categoryOrder = ['new', 'bestseller', 'regular', 'outofstock'] as const;
 
   const FilterSection = ({ category }: { category: FilterKey }) => {
     const categoryNames = {
       type: 'Type',
       texture: 'Texture',
       length: 'Longueur',
-      color: 'Couleur'
+      color: 'Couleur',
+      category: 'Catégorie'
     };
     
     return (
       <div className="mb-6">
-        <h4 className="font-medium mb-3">{categoryNames[category]}</h4>
+        <h4 className="font-medium mb-3 flex items-center gap-2">
+          {category === 'category' && <span className="text-gold">★</span>}
+          {categoryNames[category]}
+        </h4>
         <div className="space-y-2">
-          {filterOptions[category].map((option) => (
-            <label
-              key={option}
-              className="flex items-center gap-3 cursor-pointer group"
-            >
-              <Checkbox
-                checked={filters[category].includes(option)}
-                onCheckedChange={() => toggleFilter(category, option)}
-              />
-              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                {option}
-              </span>
-            </label>
-          ))}
+          {filterOptions[category].map((option) => {
+            let count = 0;
+            if (category === 'category') {
+              if (option === 'Nouveautés') count = allWigs.filter(w => w.category === 'new').length;
+              if (option === 'Meilleures Ventes') count = allWigs.filter(w => w.category === 'bestseller').length;
+              if (option === 'Épuisé') count = allWigs.filter(w => w.category === 'outofstock').length;
+            }
+            
+            return (
+              <label
+                key={option}
+                className="flex items-center justify-between cursor-pointer group hover:bg-secondary/30 p-2 rounded-lg transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <Checkbox
+                    checked={filters[category].includes(option)}
+                    onCheckedChange={() => toggleFilter(category, option)}
+                  />
+                  <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                    {option}
+                  </span>
+                </div>
+                {category === 'category' && (
+                  <span className="text-xs bg-gold/20 text-gold-dark px-2 py-1 rounded-full">
+                    {count}
+                  </span>
+                )}
+              </label>
+            );
+          })}
         </div>
       </div>
     );
@@ -233,10 +363,13 @@ const Shop = () => {
 
   const FiltersContent = () => (
     <div className="space-y-6">
-      <FilterSection category="type" />
-      <FilterSection category="texture" />
-      <FilterSection category="length" />
-      <FilterSection category="color" />
+      <FilterSection category="category" />
+      <div className="border-t border-border/50 pt-6">
+        <FilterSection category="type" />
+        <FilterSection category="texture" />
+        <FilterSection category="length" />
+        <FilterSection category="color" />
+      </div>
       
       <div className="mb-6">
         <h4 className="font-medium mb-4">Gamme de Prix</h4>
@@ -255,13 +388,14 @@ const Shop = () => {
 
       <Button
         variant="outline"
-        className="w-full"
+        className="w-full cursor-pointer bg-[#e1b052] hover:bg-[#d89c2b]"
         onClick={() =>
           setFilters({
             type: [],
             texture: [],
             length: [],
             color: [],
+            category: [],
             priceRange: [0, 458500],
           })
         }
@@ -273,7 +407,7 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen">
-      <ShopHeader />
+      <FixedHeader />
       
       <main>
         {/* Page Header */}
@@ -284,7 +418,7 @@ const Shop = () => {
               animate={{ opacity: 1, y: 0 }}
               className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium mb-4"
             >
-              Boutique <span className="text-gradient-gold">Perruques Premium</span>
+              Boutique des <span className="text-gradient-gold">Perruques</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -312,7 +446,7 @@ const Shop = () => {
               {/* Toolbar */}
               <div className="flex items-center justify-between mb-8">
                 <p className="text-muted-foreground">
-                  <span className="font-medium text-foreground">{sortedWigs.length}</span> perruques trouvées
+                  <span className="font-medium text-foreground">{filteredWigs.length}</span> perruques trouvées
                 </p>
 
                 <div className="flex items-center gap-4">
@@ -352,106 +486,135 @@ const Shop = () => {
                 </div>
               </div>
 
-              {/* Products Grid */}
-              <motion.div
-                layout
-                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
-              >
-                <AnimatePresence mode="popLayout">
-                  {sortedWigs.map((wig) => (
-                    <motion.div
-                      key={wig.id}
-                      layout
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.3 }}
-                      className="group"
-                    >
-                      <div className="luxury-card bg-card rounded-2xl overflow-hidden border border-border/50">
-                        <div className="relative aspect-square img-zoom">
-                          <img
-                            src={wig.image}
-                            alt={wig.name}
-                            className="w-full h-full object-cover"
-                          />
-                          
-                          {wig.badge && (
-                            <Badge className="absolute top-4 left-4 bg-gold text-white border-0 font-semibold">
-                              {wig.badge}
-                            </Badge>
-                          )}
-
-                          {!wig.inStock && (
-                            <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
-                              <span className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
-                                Épuisé
-                              </span>
-                            </div>
-                          )}
-
-                          <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-black/80 hover:scale-110">
-                            <Heart className="h-5 w-5 text-white" />
-                          </button>
-
-                          {wig.inStock && (
-                            <div className="absolute bottom-4 flex justify-center  left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                              <Button variant="gold" size="lg" className=" w-[70%]  bg-[#e1b052] hover:bg-[#d89c2b] cursor-pointer text-white">
-                                <ShoppingBag className="h-4 w-4" />
-                                Ajouter au Panier
-                              </Button>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="p-5">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs text-muted-foreground uppercase tracking-wider">
-                              {wig.type}
-                            </span>
-                            <span className="text-xs text-muted-foreground">
-                              {wig.length} • {wig.texture}
-                            </span>
-                          </div>
-                          
-                          <h3 className="font-serif text-lg font-medium mb-2 group-hover:text-gold-dark transition-colors">
-                            <Link to={`/product/${wig.id}`}>{wig.name}</Link>
-                          </h3>
-
-                          <div className="flex items-center gap-2 mb-3">
-                            <div className="flex items-center gap-0.5">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`h-3.5 w-3.5 ${
-                                    i < Math.floor(wig.rating)
-                                      ? 'fill-gold text-gold'
-                                      : 'text-muted'
-                                  }`}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-xs text-muted-foreground">
-                              ({wig.reviews})
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-2">
-                            <span className="text-lg font-semibold">{wig.price.toLocaleString()} FCFA</span>
-                            {wig.originalPrice && (
-                              <span className="text-sm text-muted-foreground line-through">
-                                {wig.originalPrice.toLocaleString()} FCFA
-                              </span>
-                            )}
-                          </div>
-                        </div>
+              {/* Products Grid - Groupé par catégories */}
+              <div className="space-y-12">
+                {categoryOrder.map(categoryKey => {
+                  const categoryWigs = groupedWigs[categoryKey];
+                  if (categoryWigs.length === 0) return null;
+                  
+                  return (
+                    <div key={categoryKey} className="space-y-6">
+                      <div className="flex items-center gap-4">
+                        <h2 className="font-serif text-2xl font-medium text-foreground">
+                          {categoryTitles[categoryKey]}
+                        </h2>
+                        <div className="h-px bg-border flex-1" />
+                        <span className="text-sm text-muted-foreground bg-secondary/50 px-3 py-1 rounded-full">
+                          {categoryWigs.length} produit{categoryWigs.length > 1 ? 's' : ''}
+                        </span>
                       </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </motion.div>
+                      
+                      <motion.div
+                        layout
+                        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+                      >
+                        <AnimatePresence mode="popLayout">
+                          {categoryWigs.map((wig) => (
+                            <motion.div
+                              key={wig.id}
+                              layout
+                              initial={{ opacity: 0, scale: 0.9 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.9 }}
+                              transition={{ duration: 0.3 }}
+                              className="group"
+                            >
+                              <div className="luxury-card bg-card rounded-2xl overflow-hidden border border-border/50">
+                                <div className="relative aspect-square img-zoom">
+                                  <img
+                                    src={wig.image}
+                                    alt={wig.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                  
+                                  {wig.badge && (
+                                    <Badge className="absolute top-4 left-4 bg-gold text-white border-0 font-semibold">
+                                      {wig.badge}
+                                    </Badge>
+                                  )}
 
-              {sortedWigs.length === 0 && (
+                                  {!wig.inStock && (
+                                    <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
+                                      <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
+                                        Épuisé
+                                      </span>
+                                    </div>
+                                  )}
+
+                                  {wig.inStock && (
+                                    <div className="absolute bottom-4 flex justify-center left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                                      <Button 
+                                        variant="gold" 
+                                        size="lg" 
+                                        className="w-[70%] bg-[#e1b052] hover:bg-[#d89c2b] cursor-pointer text-white"
+                                        onClick={() => addItem({
+                                          id: wig.id.toString(),
+                                          name: wig.name,
+                                          price: wig.price,
+                                          image: wig.image,
+                                          color: wig.color,
+                                          length: wig.length
+                                        })}
+                                      >
+                                        <ShoppingBag className="h-4 w-4" />
+                                        Ajouter au Panier
+                                      </Button>
+                                    </div>
+                                  )}
+                                </div>
+
+                                <div className="p-5">
+                                  <div className="flex items-center justify-between mb-1">
+                                    <span className="text-xs text-muted-foreground uppercase tracking-wider">
+                                      {wig.type}
+                                    </span>
+                                    <span className="text-xs text-muted-foreground">
+                                      {wig.length} • {wig.texture}
+                                    </span>
+                                  </div>
+                                  
+                                  <h3 className="font-serif text-lg font-medium mb-2 group-hover:text-gold-dark transition-colors">
+                                    <Link to={`/product/${wig.id}`}>{wig.name}</Link>
+                                  </h3>
+
+                                  <div className="flex items-center gap-2 mb-3">
+                                    <div className="flex items-center gap-0.5">
+                                      {[...Array(5)].map((_, i) => (
+                                        <Star
+                                          key={i}
+                                          className={`h-3.5 w-3.5 ${
+                                            i < Math.floor(wig.rating)
+                                              ? 'fill-gold text-gold'
+                                              : 'text-muted'
+                                          }`}
+                                        />
+                                      ))}
+                                    </div>
+                                    <span className="text-xs text-muted-foreground">
+                                      ({wig.reviews})
+                                    </span>
+                                  </div>
+
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-lg font-semibold">{wig.price.toLocaleString()} FCFA</span>
+                                    {wig.originalPrice && (
+                                      <span className="text-sm text-muted-foreground line-through">
+                                        {wig.originalPrice.toLocaleString()} FCFA
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </AnimatePresence>
+                      </motion.div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {filteredWigs.length === 0 && (
                 <div className="text-center py-20">
                   <p className="text-xl text-muted-foreground mb-4">
                     Aucune perruque ne correspond à vos filtres
@@ -464,6 +627,7 @@ const Shop = () => {
                         texture: [],
                         length: [],
                         color: [],
+                        category: [],
                         priceRange: [0, 458500],
                       })
                     }
@@ -481,115 +645,5 @@ const Shop = () => {
     </div>
   );
 };
-
-// Header fixe pour la page Shop
-function ShopHeader() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
-
-  return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50 shadow-soft py-3 transition-all duration-500">
-        <div className="container-luxury flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <span className="font-serif text-2xl md:text-3xl font-semibold tracking-tight text-foreground transition-colors">
-              Luxe<span className="text-gradient-gold">Wig</span>
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  'link-underline text-sm font-medium tracking-wide transition-colors',
-                  location.pathname === link.path
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
-              <Heart className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
-              <User className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="relative text-foreground hover:text-foreground/80 transition-colors">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-gold rounded-full text-xs font-semibold flex items-center justify-center text-primary">
-                0
-              </span>
-            </Button>
-
-            {/* Mobile Menu Toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden text-foreground hover:text-foreground/80 transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden"
-          >
-            <div className="absolute inset-0 bg-background/95 backdrop-blur-lg pt-24">
-              <nav className="flex flex-col items-center gap-8 pt-10">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.path}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      to={link.path}
-                      className={cn(
-                        'font-serif text-2xl font-medium tracking-wide transition-colors',
-                        location.pathname === link.path
-                          ? 'text-foreground'
-                          : 'text-muted-foreground'
-                      )}
-                    >
-                      {link.name}
-                    </Link>
-                  </motion.div>
-                ))}
-              </nav>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
-}
 
 export default Shop;

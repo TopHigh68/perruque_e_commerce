@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Heart, ShoppingBag, Star, ArrowRight } from 'lucide-react';
+import { ShoppingBag, Star, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useCart } from '@/contexts/CartContext';
 import wigProduct1 from '@/assets/wig-product-1.jpg';
 import wigProduct2 from '@/assets/wig-product-2.jpg';
 import wigProduct3 from '@/assets/wig-product-3.jpg';
@@ -71,6 +72,8 @@ const itemVariants = {
 };
 
 export function FeaturedWigs() {
+  const { addItem } = useCart();
+
   return (
     <section className="section-padding bg-secondary/30">
       <div className="container-luxury">
@@ -135,14 +138,19 @@ export function FeaturedWigs() {
                     </Badge>
                   )}
 
-                  {/* Wishlist Button */}
-                  <button className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-black/80 hover:scale-110">
-                    <Heart className="h-5 w-5 text-white" />
-                  </button>
-
                   {/* Quick Add */}
                   <div className="absolute bottom-4  left-4 right-4  flex justify-center opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                    <Button variant="gold" size="lg" className=" w-[70%] bg-[#e1b052] rounded-xl hover:bg-[#d89c2b] cursor-pointer text-white">
+                    <Button 
+                      variant="gold" 
+                      size="lg" 
+                      className=" w-[70%] bg-[#e1b052] rounded-xl hover:bg-[#d89c2b] cursor-pointer text-white"
+                      onClick={() => addItem({
+                        id: wig.id.toString(),
+                        name: wig.name,
+                        price: wig.price,
+                        image: wig.image
+                      })}
+                    >
                       <ShoppingBag className="h-4 w-4" />
                       Ajouter au Panier
                     </Button>

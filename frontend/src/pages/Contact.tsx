@@ -1,24 +1,16 @@
-import { useState, useEffect } from 'react';
+
 import { motion } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
-import { Mail, Phone, MapPin, Send, MessageCircle, Menu, X, ShoppingBag, Heart, Search, User } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { FixedHeader } from '@/components/layout/FixedHeader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { cn } from '@/lib/utils';
-
-const navLinks = [
-  { name: 'Accueil', path: '/' },
-  { name: 'Boutique', path: '/shop' },
-  { name: 'À propos', path: '/about' },
-  { name: 'Contact', path: '/contact' },
-];
 
 const Contact = () => {
   return (
     <div className="min-h-screen">
-      <ContactHeader />
+      <FixedHeader />
 
       <main>
         {/* Hero Section */}
@@ -37,7 +29,7 @@ const Contact = () => {
               transition={{ delay: 0.1 }}
               className="text-lg text-muted-foreground max-w-3xl mx-auto"
             >
-              <p>Vous avez des questions sur nos perruques ou besoin de conseils de coiffure ?</p> 
+              <p>Vous avez des questions sur nos perruques ou besoin de conseils de coiffure ?</p>
               <p>Notre équipe est là pour vous aider à trouver votre look parfait.</p>
             </motion.p>
           </div>
@@ -54,7 +46,7 @@ const Contact = () => {
                 viewport={{ once: true }}
               >
                 <h2 className="font-serif text-3xl font-medium mb-8">Envoyez-nous un Message</h2>
-                
+
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -79,8 +71,8 @@ const Contact = () => {
 
                   <div>
                     <label className="block text-sm font-medium mb-2 ">Message</label>
-                    <Textarea 
-                      placeholder="Parlez-nous de votre demande..." 
+                    <Textarea
+                      placeholder="Parlez-nous de votre demande..."
                       className="min-h-[150px] resize-none"
                     />
                   </div>
@@ -107,7 +99,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Écrivez-nous</h3>
-                      <p className="text-muted-foreground">hello@luxewig.com</p>
+                      <p className="text-muted-foreground">contact@luxewig.com</p>
                       <p className="text-sm text-muted-foreground">Nous répondons sous 24h</p>
                     </div>
                   </div>
@@ -118,7 +110,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-medium mb-1">Appelez-nous</h3>
-                      <p className="text-muted-foreground">+33 1 23 45 67 89</p>
+                      <p className="text-muted-foreground">+229 01 51 00 00 00</p>
                       <p className="text-sm text-muted-foreground">Lun-Ven 9h-18h</p>
                     </div>
                   </div>
@@ -150,7 +142,7 @@ const Contact = () => {
                     </div>
                   </div>
                   <p className="text-muted-foreground mb-6">
-                    Vous préférez chatter ? Connectez-vous directement avec nos spécialistes perruques 
+                    Vous préférez chatter ? Connectez-vous directement avec nos spécialistes perruques
                     sur WhatsApp pour des recommandations personnalisées et des réponses rapides.
                   </p>
                   <Button
@@ -159,7 +151,9 @@ const Contact = () => {
                     className="w-full bg-[#e1b052] hover:bg-[#d89c2b] transition-color cursor-pointer"
                     onClick={() => window.open('https://wa.me/33123456789', '_blank')}
                   >
-                    <MessageCircle className="h-5 w-5" />
+                    <svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="mr-2">
+                      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
+                    </svg>
                     Démarrer le Chat WhatsApp
                   </Button>
                 </div>
@@ -167,119 +161,25 @@ const Contact = () => {
             </div>
           </div>
         </section>
+
+        {/* Map Section */}
+        <section className="w-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615674073!3d48.85837007928746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel%20Tower!5e0!3m2!1sen!2sfr!4v1635789012345!5m2!1sen!2sfr"
+            width="100%"
+            height="400"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Notre localisation"
+          />
+        </section>
       </main>
 
       <Footer />
     </div>
   );
 };
-
-// Header fixe pour la page Contact
-function ContactHeader() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
-
-  return (
-    <>
-      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50 shadow-soft py-3 transition-all duration-500">
-        <div className="container-luxury flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <span className="font-serif text-2xl md:text-3xl font-semibold tracking-tight text-foreground transition-colors">
-              Luxe<span className="text-gradient-gold">Wig</span>
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  'link-underline text-sm font-medium tracking-wide transition-colors',
-                  location.pathname === link.path
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Actions */}
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
-              <Heart className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="hidden md:flex text-foreground hover:text-foreground/80 transition-colors">
-              <User className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="relative text-foreground hover:text-foreground/80 transition-colors">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-gold rounded-full text-xs font-semibold flex items-center justify-center text-primary">
-                0
-              </span>
-            </Button>
-
-            {/* Mobile Menu Toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden text-foreground hover:text-foreground/80 transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-40 lg:hidden"
-        >
-          <div className="absolute inset-0 bg-background/95 backdrop-blur-lg pt-24">
-            <nav className="flex flex-col items-center gap-8 pt-10">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    to={link.path}
-                    className={cn(
-                      'font-serif text-2xl font-medium tracking-wide transition-colors',
-                      location.pathname === link.path
-                        ? 'text-foreground'
-                        : 'text-muted-foreground'
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-          </div>
-        </motion.div>
-      )}
-    </>
-  );
-}
 
 export default Contact;
