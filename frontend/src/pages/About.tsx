@@ -5,6 +5,8 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-model-1.jpg';
+import heroImage1 from '../../public/perruques/heroaboutimage.jpg';
+
 
 const About = () => {
   return (
@@ -23,26 +25,22 @@ const About = () => {
             />
           </div>
 
-          <div className="container-luxury relative z-20 pt-32">
+          <div className="container-luxury relative z-20 pt-20 md:pt-32 px-4">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="max-w-3xl"
+              className="max-w-4xl mx-auto"
             >
-              <p className=" text-white text-7xl text-center font-semibold tracking-wider uppercase mb-4">
+              <p className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center font-semibold tracking-wider uppercase mb-4 md:mb-6">
                 Notre Histoire
               </p>
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium leading-tight mb-6">
-                <p className='text-center text-white'>Créer la Confiance</p>
-                <span className="text-gradient-gold">Une Perruque à la Fois</span>
-              </h1>
-              <div className="text-center space-y-4">
-                <p className="text-xl text-white/90 leading-relaxed font-light">
+              <div className="text-center space-y-4 md:space-y-6 px-4">
+                <p className="text-lg sm:text-xl md:text-xl text-white/90 leading-relaxed font-light max-w-3xl mx-auto">
                   Chez <span className="text-gold font-medium">LuxeWig</span>, nous croyons que chaque femme mérite 
                   de se sentir <span className="text-white font-medium">belle et confiante</span>.
                 </p>
-                <p className="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-base sm:text-lg md:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
                   Notre voyage a commencé avec une mission simple : créer des perruques qui ne semblent pas seulement 
                   naturelles, mais qui <em className="text-gold-light">se sentent comme une extension de qui vous êtes</em>.
                 </p>
@@ -137,7 +135,7 @@ const About = () => {
               >
                 <div className="aspect-4/5 rounded-2xl overflow-hidden">
                   <img
-                    src={heroImage}
+                    src={heroImage1}
                     alt="Notre histoire"
                     className="w-full h-full object-cover"
                   />
