@@ -41,7 +41,7 @@ const About = () => {
                   de se sentir <span className="text-white font-medium">belle et confiante</span>.
                 </p>
                 <p className="text-base sm:text-lg md:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
-                  Notre voyage a commencé avec une mission simple : créer des perruques qui ne semblent pas seulement 
+                  Notre voyage a commencé avec une mission simple : vendre des perruques qui ne semblent pas seulement 
                   naturelles, mais qui <em className="text-gold-light">se sentent comme une extension de qui vous êtes</em>.
                 </p>
               </div>
