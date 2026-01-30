@@ -8,9 +8,7 @@ import {
   Users, 
   ShoppingBag, 
   DollarSign,
-  Calendar,
   Eye,
-  Heart,
   Package
 } from 'lucide-react';
 import { AdminLayout } from '@/components/admin/AdminLayout';

@@ -36,18 +36,18 @@ export function Footer() {
     <footer className="bg-black text-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_hsl(var(--gold))_0%,_transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_hsl(var(--gold))_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--gold))_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--gold))_0%,transparent_50%)]" />
       </div>
 
       {/* Newsletter Section */}
       <div className="relative z-10 border-b border-white/10">
         <div className="container-luxury py-12">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-dark mb-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-linear-to-br from-gold to-gold-dark mb-4">
               <Mail className="h-6 w-6 text-black" />
             </div>
-            <h3 className="font-serif text-2xl md:text-3xl font-medium mb-4 bg-gradient-to-r from-white via-gold to-white bg-clip-text text-transparent">
+            <h3 className="font-serif text-2xl md:text-3xl font-medium mb-4 bg-linear-to-r from-white via-gold to-white bg-clip-text text-transparent">
               Rejoignez la Famille LuxeWig
             </h3>
             <p className="text-white/70 mb-6 leading-relaxed">
@@ -61,7 +61,7 @@ export function Footer() {
               />
               <Button 
                 size="lg" 
-                className="h-12 px-6 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-black font-semibold rounded-full transition-all duration-300 hover:scale-105"
+                className="h-12 px-6 bg-linear-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-black font-semibold rounded-full transition-all duration-300 hover:scale-105"
               >
                 S'abonner
               </Button>
@@ -89,7 +89,7 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="group w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-gradient-to-br hover:from-gold hover:to-gold-dark hover:border-gold hover:scale-110 backdrop-blur-sm"
+                  className="group w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center transition-all duration-300 hover:bg-linear-to-br hover:from-gold hover:to-gold-dark hover:border-gold hover:scale-110 backdrop-blur-sm"
                 >
                   <social.icon className="h-4 w-4 text-white group-hover:text-black transition-colors" />
                 </a>
@@ -101,7 +101,7 @@ export function Footer() {
           <div>
             <h4 className="font-serif text-lg font-medium mb-4 text-gold relative">
               Boutique
-              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-gradient-to-r from-gold to-transparent"></div>
+              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-linear-to-r from-gold to-transparent"></div>
             </h4>
             <ul className="space-y-2">
               {footerLinks.shop.map((link) => (
@@ -121,7 +121,7 @@ export function Footer() {
           <div>
             <h4 className="font-serif text-lg font-medium mb-4 text-gold relative">
               Aide
-              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-gradient-to-r from-gold to-transparent"></div>
+              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-linear-to-r from-gold to-transparent"></div>
             </h4>
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
@@ -141,23 +141,23 @@ export function Footer() {
           <div>
             <h4 className="font-serif text-lg font-medium mb-4 text-gold relative">
               Contact
-              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-gradient-to-r from-gold to-transparent"></div>
+              <div className="absolute -bottom-1 left-0 w-6 h-0.5 bg-linear-to-r from-gold to-transparent"></div>
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3 group">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
+                <div className="w-8 h-8 rounded-full bg-linear-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
                   <Mail className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
                 </div>
                 <span className="text-white/70 group-hover:text-white transition-colors text-sm">hello@luxewig.com</span>
               </li>
               <li className="flex items-start gap-3 group">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
+                <div className="w-8 h-8 rounded-full bg-linear-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
                   <Phone className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
                 </div>
                 <span className="text-white/70 group-hover:text-white transition-colors text-sm">+33 1 23 45 67 89</span>
               </li>
               <li className="flex items-start gap-3 group">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
+                <div className="w-8 h-8 rounded-full bg-linear-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
                   <MapPin className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
                 </div>
                 <span className="text-white/70 group-hover:text-white transition-colors text-sm">
@@ -174,7 +174,7 @@ export function Footer() {
         <div className="container-luxury py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-linear-to-br from-gold to-gold-dark flex items-center justify-center">
                 <span className="text-black font-bold text-xs">©</span>
               </div>
               <p className="text-white/60 text-xs">

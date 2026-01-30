@@ -7,7 +7,7 @@ export function CallToAction() {
   return (
     <section className="section-padding">
       <div className="container-luxury">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-champagne via-rose/50 to-champagne-dark p-12 md:p-20">
+        <div className="relative rounded-3xl overflow-hidden bg-linear-to-br from-champagne via-rose/50 to-champagne-dark p-12 md:p-20">
           {/* Decorative Elements */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-rose-dark/20 rounded-full blur-3xl" />

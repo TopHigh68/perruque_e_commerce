@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCart } from '@/contexts/CartContext';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { isValidPhoneNumber, isPossiblePhoneNumber, validatePhoneNumberLength } from 'libphonenumber-js';
+import { isValidPhoneNumber, isPossiblePhoneNumber } from 'libphonenumber-js';
 
 const Checkout = () => {
   const { state, totalPrice } = useCart();
@@ -185,19 +185,10 @@ const Checkout = () => {
                           value={formData.phone}
                           disableDropdown={false}
                           onChange={(phone) => {
-                            // Si le nouveau numéro est déjà valide, bloquer tout ajout supplémentaire
-                            try {
-                              if (isValidPhoneNumber('+' + phone, 'BJ') && phone.length > formData.phone.length) {
-                                return;
-                              }
-                            } catch {}
-                            
-                            // Bloquer strictement à 13 caractères (229 + 10 chiffres)
-                            if (phone.length > 13) {
-                              return;
+                            // Bloquer à exactement 11 caractères
+                            if (phone.length <= 11) {
+                              setFormData({ ...formData, phone });
                             }
-                            
-                            setFormData({ ...formData, phone });
                           }}
                           isValid={(value) => {
                             try {
@@ -302,7 +293,7 @@ const Checkout = () => {
                           value={formData.notes}
                           onChange={handleInputChange}
                           placeholder="Instructions spéciales pour la livraison..."
-                          className="min-h-[100px]"
+                          className="min-h-25"
                         />
                       </div>
                     </div>

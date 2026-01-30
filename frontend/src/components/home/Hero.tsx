@@ -13,7 +13,7 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-r from-background/95 via-background/70 to-transparent z-10" />
         <img
           src={heroImage}
           alt="Belle femme portant une perruque de luxe"

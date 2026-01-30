@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Heart, Award, Users, Sparkles } from 'lucide-react';
+import { ArrowRight, Heart, Award, Users } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
@@ -14,7 +14,7 @@ const About = () => {
       <main>
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent z-10" />
+          <div className="absolute inset-0 bg-linear-to-r from-background/95 via-background/70 to-transparent z-10" />
           <div className="absolute inset-0">
             <img
               src={heroImage}
@@ -80,7 +80,7 @@ const About = () => {
                   transition={{ delay: index * 0.15 }}
                   className="text-center p-8"
                 >
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold/20 to-champagne flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 rounded-full bg-linear-to-br from-gold/20 to-champagne flex items-center justify-center mx-auto mb-6">
                     <value.icon className="h-8 w-8 text-gold-dark" />
                   </div>
                   <h3 className="font-serif text-2xl font-medium mb-4">{value.title}</h3>
@@ -135,7 +135,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden">
+                <div className="aspect-4/5 rounded-2xl overflow-hidden">
                   <img
                     src={heroImage}
                     alt="Notre histoire"

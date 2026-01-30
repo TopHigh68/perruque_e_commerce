@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
-import { Heart, ShoppingBag, Star, SlidersHorizontal, X, ChevronDown, Menu, Search, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ShoppingBag, Star, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { FixedHeader } from '@/components/layout/FixedHeader';
 import { Button } from '@/components/ui/button';
@@ -16,18 +16,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { cn } from '@/lib/utils';
-import wigProduct1 from '@/assets/wig-product-1.jpg';
-import wigProduct2 from '@/assets/wig-product-2.jpg';
-import wigProduct3 from '@/assets/wig-product-3.jpg';
-import wigProduct4 from '@/assets/wig-product-4.jpg';
 
-const navLinks = [
-  { name: 'Accueil', path: '/' },
-  { name: 'Boutique', path: '/shop' },
-  { name: 'À propos', path: '/about' },
-  { name: 'Contact', path: '/contact' },
-];
 
 const allWigs = [
   {
@@ -434,7 +423,7 @@ const Shop = () => {
         <div className="container-luxury py-12">
           <div className="flex gap-8">
             {/* Desktop Filters Sidebar */}
-            <aside className="hidden lg:block w-64 flex-shrink-0">
+            <aside className="hidden lg:block w-64 shrink-0">
               <div className="sticky top-28">
                 <h3 className="font-serif text-xl font-medium mb-6">Filtres</h3>
                 <FiltersContent />

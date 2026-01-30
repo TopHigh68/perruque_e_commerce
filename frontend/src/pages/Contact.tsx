@@ -73,7 +73,7 @@ const Contact = () => {
                     <label className="block text-sm font-medium mb-2 ">Message</label>
                     <Textarea
                       placeholder="Parlez-nous de votre demande..."
-                      className="min-h-[150px] resize-none"
+                      className="min-h-37.5 resize-none"
                     />
                   </div>
 
@@ -94,7 +94,7 @@ const Contact = () => {
 
                 <div className="space-y-8 mb-12">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold/20 to-champagne flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-gold/20 to-champagne flex items-center justify-center shrink-0">
                       <Mail className="h-6 w-6 text-gold-dark" />
                     </div>
                     <div>
@@ -105,7 +105,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold/20 to-champagne flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-gold/20 to-champagne flex items-center justify-center shrink-0">
                       <Phone className="h-6 w-6 text-gold-dark" />
                     </div>
                     <div>
@@ -116,7 +116,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold/20 to-champagne flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-linear-to-br from-gold/20 to-champagne flex items-center justify-center shrink-0">
                       <MapPin className="h-6 w-6 text-gold-dark" />
                     </div>
                     <div>

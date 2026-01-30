@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Heart, ShoppingBag, Star, Truck, Shield, RefreshCw, ChevronLeft, ChevronRight, Calendar, Check } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
@@ -50,8 +50,7 @@ const relatedProducts = [
 ];
 
 const ProductDetail = () => {
-  const { id } = useParams();
-  const [selectedImage, setSelectedImage] = useState(0);
+    const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showReservation, setShowReservation] = useState(false);
 
@@ -318,7 +317,7 @@ const ProductDetail = () => {
                   <ul className="space-y-4">
                     {product.careInstructions.map((instruction, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <Check className="h-5 w-5 text-gold mt-0.5 flex-shrink-0" />
+                        <Check className="h-5 w-5 text-gold mt-0.5 shrink-0" />
                         <span className="text-muted-foreground">{instruction}</span>
                       </li>
                     ))}

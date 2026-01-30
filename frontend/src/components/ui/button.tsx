@@ -18,7 +18,7 @@ const buttonVariants = cva(
         // Luxury variants
         luxury: "bg-primary text-primary-foreground hover:shadow-gold hover:scale-[1.02] active:scale-[0.98]",
         "luxury-outline": "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
-        gold: "bg-gradient-to-r from-gold to-gold-light text-primary font-semibold hover:shadow-gold hover:scale-[1.02] active:scale-[0.98]",
+        gold: "bg-linear-to-r from-gold to-gold-light text-primary font-semibold hover:shadow-gold hover:scale-[1.02] active:scale-[0.98]",
         "gold-outline": "border-2 border-gold bg-transparent text-gold-dark hover:bg-gold hover:text-primary font-semibold",
         hero: "bg-primary text-primary-foreground text-base font-semibold tracking-wide hover:shadow-medium hover:scale-[1.02] active:scale-[0.98]",
         "hero-secondary": "bg-transparent border-2 border-primary text-primary text-base font-semibold tracking-wide hover:bg-primary hover:text-primary-foreground",

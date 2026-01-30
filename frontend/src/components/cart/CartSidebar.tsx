@@ -17,7 +17,7 @@ export function CartSidebar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeCart}
-            className="fixed inset-0 bg-black/50 z-[60]"
+            className="fixed inset-0 bg-black/50 z-60"
           />
           
           {/* Sidebar */}
@@ -26,7 +26,7 @@ export function CartSidebar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[60] flex flex-col shadow-xl"
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-60 flex flex-col shadow-xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b">

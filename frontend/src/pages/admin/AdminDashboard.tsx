@@ -7,7 +7,6 @@ import {
   TrendingUp,
   Plus,
   Search,
-  Filter,
   Edit,
   Trash2,
   Eye,

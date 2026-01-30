@@ -80,13 +80,13 @@ export function Benefits() {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {benefits.map((benefit, index) => (
+          {benefits.map((benefit) => (
             <motion.div
               key={benefit.title}
               variants={itemVariants}
               className="group relative p-8 rounded-2xl bg-card border border-border/50 hover:border-gold/30 transition-all duration-500 hover:shadow-soft"
             >
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gold/20 to-champagne flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <div className="w-14 h-14 rounded-xl bg-linear-to-br from-gold/20 to-champagne flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                 <benefit.icon className="h-7 w-7 text-gold-dark" />
               </div>
               <h3 className="font-serif text-xl font-medium mb-3">{benefit.title}</h3>
