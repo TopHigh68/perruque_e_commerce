@@ -5,30 +5,30 @@ import { Input } from '@/components/ui/input';
 
 const footerLinks = {
   shop: [
-    { name: 'Perruques Cheveux Humains', path: '/shop?type=human' },
-    { name: 'Perruques Synthétiques', path: '/shop?type=synthetic' },
-    { name: 'Nouveautés', path: '/shop?sort=new' },
-    { name: 'Meilleures Ventes', path: '/shop?sort=bestseller' },
+    { name: 'Perruques Cheveux Humains', path: '/shop?collection=nouveautes' },
+    { name: 'Perruques Synthétiques', path: '/shop?collection=meilleures_ventes' },
+    { name: 'Nouveautés', path: '/shop?collection=nouveautes' },
+    { name: 'Meilleures Ventes', path: '/shop?collection=meilleures_ventes' },
   ],
   support: [
-    { name: 'FAQ', path: '/faq' },
-    { name: 'Guide d\'Entretien', path: '/care-guide' },
-    { name: 'Infos Livraison', path: '/shipping' },
-    { name: 'Retours & Échanges', path: '/returns' },
+    { name: 'FAQ', path: '/#faq' },
+    { name: 'Guide d\'Entretien', path: '/#care-guide' },
+    { name: 'Infos Livraison', path: '/contact' },
+    { name: 'Retours & Échanges', path: '/contact' },
   ],
   company: [
     { name: 'À Propos', path: '/about' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Carrières', path: '/careers' },
+    { name: 'Boutique', path: '/shop' },
+    { name: 'Accueil', path: '/' },
   ],
 };
 
 const socialLinks = [
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Youtube, href: '#', label: 'Youtube' },
+  { icon: Instagram, href: 'https://instagram.com/luxewig', label: 'Instagram' },
+  { icon: Facebook, href: 'https://facebook.com/luxewig', label: 'Facebook' },
+  { icon: Twitter, href: 'https://twitter.com/luxewig', label: 'Twitter' },
+  { icon: Youtube, href: 'https://youtube.com/@luxewig', label: 'Youtube' },
 ];
 
 export function Footer() {
@@ -126,12 +126,21 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-white/70 hover:text-gold transition-all duration-300 hover:translate-x-1 inline-block text-sm"
-                  >
-                    {link.name}
-                  </Link>
+                  {(link.path === '/#faq' || link.path === '/#care-guide') ? (
+                    <a
+                      href={link.path}
+                      className="text-white/70 hover:text-gold transition-all duration-300 hover:translate-x-1 inline-block text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className="text-white/70 hover:text-gold transition-all duration-300 hover:translate-x-1 inline-block text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -148,20 +157,20 @@ export function Footer() {
                 <div className="w-8 h-8 rounded-full bg-linear-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
                   <Mail className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
                 </div>
-                <span className="text-white/70 group-hover:text-white transition-colors text-sm">hello@luxewig.com</span>
+                <span className="text-white/70 group-hover:text-white transition-colors text-sm">contact@luxewig.bj</span>
               </li>
               <li className="flex items-start gap-3 group">
                 <div className="w-8 h-8 rounded-full bg-linear-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
                   <Phone className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
                 </div>
-                <span className="text-white/70 group-hover:text-white transition-colors text-sm">+33 1 23 45 67 89</span>
+                <span className="text-white/70 group-hover:text-white transition-colors text-sm">+229 XX XX XX XX</span>
               </li>
               <li className="flex items-start gap-3 group">
                 <div className="w-8 h-8 rounded-full bg-linear-to-br from-gold/20 to-gold-dark/20 flex items-center justify-center group-hover:from-gold group-hover:to-gold-dark transition-all duration-300">
                   <MapPin className="h-4 w-4 text-gold group-hover:text-black transition-colors" />
                 </div>
                 <span className="text-white/70 group-hover:text-white transition-colors text-sm">
-                  Paris, France
+                  Cotonou, Bénin
                 </span>
               </li>
             </ul>
@@ -182,10 +191,10 @@ export function Footer() {
               </p>
             </div>
             <div className="flex gap-6 text-xs">
-              <Link to="/privacy" className="text-white/60 hover:text-gold transition-all duration-300">
+              <Link to="/about" className="text-white/60 hover:text-gold transition-all duration-300">
                 Confidentialité
               </Link>
-              <Link to="/terms" className="text-white/60 hover:text-gold transition-all duration-300">
+              <Link to="/contact" className="text-white/60 hover:text-gold transition-all duration-300">
                 Conditions
               </Link>
             </div>

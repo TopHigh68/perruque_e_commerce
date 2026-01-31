@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Star, SlidersHorizontal, ChevronDown } from 'lucide-react';
+import { ShoppingBag, Star, SlidersHorizontal, ChevronDown, ChevronUp } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { FixedHeader } from '@/components/layout/FixedHeader';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 import { useCart } from '@/contexts/CartContext';
+import { allWigs } from '@/data/wigs';
 import {
   Sheet,
   SheetContent,
@@ -17,215 +18,12 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-
-const allWigs = [
-  {
-    id: 1,
-    name: 'Lisse Soyeux Noir',
-    type: 'Cheveux Humains',
-    texture: 'Lisse',
-    length: '45cm',
-    color: 'Noir',
-    price: 294350,
-    originalPrice: 359650,
-    rating: 4.9,
-    reviews: 128,
-    image: '/perruques/perruque1.jpg',
-    badge: 'Meilleure Vente',
-    inStock: true,
-    category: 'bestseller',
-    sales: 245,
-    createdAt: '2024-01-01'
-  },
-  {
-    id: 2,
-    name: 'Boucles Auburn Glamour',
-    type: 'Cheveux Humains',
-    texture: 'Bouclé',
-    length: '40cm',
-    color: 'Auburn',
-    price: 346870,
-    rating: 4.8,
-    reviews: 96,
-    image: '/perruques/perruque2.jpg',
-    badge: 'Nouveauté',
-    inStock: true,
-    category: 'new',
-    sales: 45,
-    createdAt: '2024-01-15'
-  },
-  {
-    id: 3,
-    name: 'Ondulations Blond Miel',
-    type: 'Cheveux Humains',
-    texture: 'Ondulé',
-    length: '55cm',
-    color: 'Blond',
-    price: 392730,
-    rating: 5.0,
-    reviews: 214,
-    image: '/perruques/perruque3.jpg',
-    badge: 'Choix de l\'Éditeur',
-    inStock: true,
-    category: 'bestseller',
-    sales: 189,
-    createdAt: '2023-12-20'
-  },
-  {
-    id: 4,
-    name: 'Afro Naturel Queen',
-    type: 'Cheveux Humains',
-    texture: 'Crépu',
-    length: '35cm',
-    color: 'Noir',
-    price: 313990,
-    rating: 4.9,
-    reviews: 87,
-    image: '/perruques/perruque4.jpg',
-    inStock: true,
-    category: 'regular',
-    sales: 67,
-    createdAt: '2023-11-10'
-  },
-  {
-    id: 5,
-    name: 'Bob Classique Châtain',
-    type: 'Cheveux Humains',
-    texture: 'Lisse',
-    length: '30cm',
-    color: 'Châtain',
-    price: 267890,
-    rating: 4.7,
-    reviews: 156,
-    image: '/perruques/perruque5.jpg',
-    inStock: true,
-    category: 'regular',
-    sales: 98,
-    createdAt: '2023-10-15'
-  },
-  {
-    id: 6,
-    name: 'Élégance Ombré Caramel',
-    type: 'Cheveux Humains',
-    texture: 'Ondulé',
-    length: '50cm',
-    color: 'Ombré',
-    price: 359595,
-    rating: 4.8,
-    reviews: 92,
-    image: '/perruques/perruque6.jpg',
-    badge: 'Tendance',
-    inStock: false,
-    category: 'outofstock',
-    sales: 134,
-    createdAt: '2023-12-05'
-  },
-  {
-    id: 7,
-    name: 'Boucles Profondes Bordeaux',
-    type: 'Cheveux Humains',
-    texture: 'Bouclé',
-    length: '45cm',
-    color: 'Bordeaux',
-    price: 320295,
-    rating: 4.9,
-    reviews: 73,
-    image: '/perruques/perruque7.jpg',
-    badge: 'Édition Limitée',
-    inStock: true,
-    category: 'new',
-    sales: 23,
-    createdAt: '2024-01-10'
-  },
-  {
-    id: 8,
-    name: 'Spirales Crépues Naturelles',
-    type: 'Cheveux Humains',
-    texture: 'Crépu',
-    length: '40cm',
-    color: 'Noir',
-    price: 300645,
-    rating: 4.8,
-    reviews: 64,
-    image: '/perruques/perruque1.jpg',
-    inStock: false,
-    category: 'outofstock',
-    sales: 156,
-    createdAt: '2023-09-20'
-  },
-  {
-    id: 9,
-    name: 'Lisse Premium Platine',
-    type: 'Cheveux Humains',
-    texture: 'Lisse',
-    length: '60cm',
-    color: 'Platine',
-    price: 425750,
-    rating: 4.9,
-    reviews: 89,
-    image: '/perruques/perruque2.jpg',
-    badge: 'Premium',
-    inStock: true,
-    category: 'new',
-    sales: 34,
-    createdAt: '2024-01-20'
-  },
-  {
-    id: 10,
-    name: 'Waves Naturelles Miel',
-    type: 'Cheveux Humains',
-    texture: 'Ondulé',
-    length: '42cm',
-    color: 'Miel',
-    price: 298450,
-    rating: 4.6,
-    reviews: 112,
-    image: '/perruques/perruque3.jpg',
-    inStock: true,
-    category: 'regular',
-    sales: 78,
-    createdAt: '2023-11-25'
-  },
-  {
-    id: 11,
-    name: 'Curly Volumineux Acajou',
-    type: 'Cheveux Humains',
-    texture: 'Bouclé',
-    length: '38cm',
-    color: 'Acajou',
-    price: 334890,
-    rating: 4.8,
-    reviews: 95,
-    image: '/perruques/perruque4.jpg',
-    inStock: true,
-    category: 'bestseller',
-    sales: 167,
-    createdAt: '2023-12-10'
-  },
-  {
-    id: 12,
-    name: 'Pixie Moderne Noir Jais',
-    type: 'Cheveux Humains',
-    texture: 'Lisse',
-    length: '25cm',
-    color: 'Noir',
-    price: 245670,
-    rating: 4.5,
-    reviews: 78,
-    image: '/perruques/perruque5.jpg',
-    inStock: true,
-    category: 'regular',
-    sales: 56,
-    createdAt: '2023-10-30'
-  }
-];
-
 const filterOptions = {
   type: ['Cheveux Humains', 'Synthétique'],
   texture: ['Lisse', 'Bouclé', 'Ondulé', 'Crépu'],
   length: ['25cm', '30cm', '35cm', '38cm', '40cm', '42cm', '45cm', '50cm', '55cm', '60cm'],
   color: ['Noir', 'Auburn', 'Blond', 'Bordeaux', 'Ombré', 'Châtain', 'Platine', 'Miel', 'Acajou'],
-  category: ['Nouveautés', 'Meilleures Ventes', 'Épuisé']
+  collection: ['Nouveautés', 'Meilleures Ventes', 'Coups de Cœur', 'Promotions', 'Épuisé']
 };
 
 type FilterKey = keyof typeof filterOptions;
@@ -235,7 +33,7 @@ interface Filters {
   texture: string[];
   length: string[];
   color: string[];
-  category: string[];
+  collection: string[];
   priceRange: [number, number];
 }
 
@@ -245,11 +43,25 @@ const Shop = () => {
     texture: [],
     length: [],
     color: [],
-    category: [],
+    collection: [],
     priceRange: [0, 458500],
   });
-  const [sortBy, setSortBy] = useState('featured');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
+    nouveautes: true,
+    meilleures_ventes: false,
+    coups_de_coeur: false,
+    promotions: false,
+    epuise: false
+  });
+  const [expandedFilters, setExpandedFilters] = useState<Record<string, boolean>>({
+    collection: true,
+    type: false,
+    texture: false,
+    length: false,
+    color: false,
+    price: false
+  });
   const { addItem } = useCart();
 
   const toggleFilter = (category: FilterKey, value: string) => {
@@ -267,37 +79,41 @@ const Shop = () => {
     if (filters.length.length && !filters.length.includes(wig.length)) return false;
     if (filters.color.length && !filters.color.includes(wig.color)) return false;
     if (wig.price < filters.priceRange[0] || wig.price > filters.priceRange[1]) return false;
-    
-    // Filtre par catégorie
-    if (filters.category.length) {
-      const hasMatchingCategory = filters.category.some(cat => {
-        if (cat === 'Nouveautés') return wig.category === 'new';
-        if (cat === 'Meilleures Ventes') return wig.category === 'bestseller';
-        if (cat === 'Épuisé') return wig.category === 'outofstock';
+
+    // Filtre par collection
+    if (filters.collection.length) {
+      const hasMatchingCollection = filters.collection.some(col => {
+        if (col === 'Nouveautés') return wig.collection === 'nouveautes';
+        if (col === 'Meilleures Ventes') return wig.collection === 'meilleures_ventes';
+        if (col === 'Coups de Cœur') return wig.collection === 'coups_de_coeur';
+        if (col === 'Promotions') return wig.collection === 'promotions';
+        if (col === 'Épuisé') return wig.collection === 'epuise';
         return false;
       });
-      if (!hasMatchingCategory) return false;
+      if (!hasMatchingCollection) return false;
     }
-    
+
     return true;
   });
 
-  // Grouper les perruques par catégorie pour l'affichage
+  // Grouper les perruques par collection pour l'affichage
   const groupedWigs = {
-    new: filteredWigs.filter(wig => wig.category === 'new'),
-    bestseller: filteredWigs.filter(wig => wig.category === 'bestseller'),
-    regular: filteredWigs.filter(wig => wig.category === 'regular'),
-    outofstock: filteredWigs.filter(wig => wig.category === 'outofstock')
+    nouveautes: filteredWigs.filter(wig => wig.collection === 'nouveautes'),
+    meilleures_ventes: filteredWigs.filter(wig => wig.collection === 'meilleures_ventes'),
+    coups_de_coeur: filteredWigs.filter(wig => wig.collection === 'coups_de_coeur'),
+    promotions: filteredWigs.filter(wig => wig.collection === 'promotions'),
+    epuise: filteredWigs.filter(wig => wig.collection === 'epuise')
   };
 
   const categoryTitles = {
-    new: 'Nouveautés',
-    bestseller: 'Meilleures Ventes',
-    regular: 'Autres Produits',
-    outofstock: 'Épuisé'
+    nouveautes: 'Nouveautés',
+    meilleures_ventes: 'Meilleures Ventes',
+    coups_de_coeur: 'Coups de Cœur',
+    promotions: 'Promotions',
+    epuise: 'Épuisé'
   };
 
-  const categoryOrder = ['new', 'bestseller', 'regular', 'outofstock'] as const;
+  const categoryOrder = ['nouveautes', 'meilleures_ventes', 'coups_de_coeur', 'promotions', 'epuise'] as const;
 
   const FilterSection = ({ category }: { category: FilterKey }) => {
     const categoryNames = {
@@ -305,86 +121,143 @@ const Shop = () => {
       texture: 'Texture',
       length: 'Longueur',
       color: 'Couleur',
-      category: 'Catégorie'
+      collection: 'Collection'
     };
-    
+
     return (
-      <div className="mb-6">
-        <h4 className="font-medium mb-3 flex items-center gap-2">
-          {category === 'category' && <span className="text-gold">★</span>}
-          {categoryNames[category]}
-        </h4>
-        <div className="space-y-2">
-          {filterOptions[category].map((option) => {
-            let count = 0;
-            if (category === 'category') {
-              if (option === 'Nouveautés') count = allWigs.filter(w => w.category === 'new').length;
-              if (option === 'Meilleures Ventes') count = allWigs.filter(w => w.category === 'bestseller').length;
-              if (option === 'Épuisé') count = allWigs.filter(w => w.category === 'outofstock').length;
-            }
-            
-            return (
-              <label
-                key={option}
-                className="flex items-center justify-between cursor-pointer group hover:bg-secondary/30 p-2 rounded-lg transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    checked={filters[category].includes(option)}
-                    onCheckedChange={() => toggleFilter(category, option)}
-                  />
-                  <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                    {option}
-                  </span>
-                </div>
-                {category === 'category' && (
-                  <span className="text-xs bg-gold/20 text-gold-dark px-2 py-1 rounded-full">
-                    {count}
-                  </span>
-                )}
-              </label>
-            );
-          })}
-        </div>
+      <div className="border border-border/30 rounded-lg overflow-hidden mb-3">
+        <button
+          onClick={() => setExpandedFilters(prev => ({
+            ...prev,
+            [category]: !prev[category]
+          }))}
+          className="w-full flex items-center justify-between p-3 bg-secondary/10 hover:bg-secondary/20 transition-colors"
+        >
+          <h4 className="font-medium text-sm flex items-center gap-2">
+            {category === 'collection' && <span className="text-gold">★</span>}
+            {categoryNames[category]}
+          </h4>
+          {expandedFilters[category] ? (
+            <ChevronUp className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          )}
+        </button>
+        
+        <AnimatePresence>
+          {expandedFilters[category] && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="p-3 space-y-1">
+                {filterOptions[category].map((option) => {
+                  let count = 0;
+                  if (category === 'collection') {
+                    if (option === 'Nouveautés') count = allWigs.filter(w => w.collection === 'nouveautes').length;
+                    if (option === 'Meilleures Ventes') count = allWigs.filter(w => w.collection === 'meilleures_ventes').length;
+                    if (option === 'Coups de Cœur') count = allWigs.filter(w => w.collection === 'coups_de_coeur').length;
+                    if (option === 'Promotions') count = allWigs.filter(w => w.collection === 'promotions').length;
+                    if (option === 'Épuisé') count = allWigs.filter(w => w.collection === 'epuise').length;
+                  }
+
+                  return (
+                    <label
+                      key={option}
+                      className="flex items-center justify-between cursor-pointer group hover:bg-secondary/30 p-2 rounded-lg transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Checkbox
+                          checked={filters[category].includes(option)}
+                          onCheckedChange={() => toggleFilter(category, option)}
+                          className="data-[state=checked]:bg-gold data-[state=checked]:border-gold"
+                        />
+                        <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                          {option}
+                        </span>
+                      </div>
+                      {category === 'collection' && (
+                        <span className="text-xs bg-gold/20 text-gold-dark px-2 py-1 rounded-full font-medium">
+                          {count}
+                        </span>
+                      )}
+                    </label>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   };
 
   const FiltersContent = () => (
-    <div className="space-y-6">
-      <FilterSection category="category" />
-      <div className="border-t border-border/50 pt-6">
-        <FilterSection category="type" />
-        <FilterSection category="texture" />
-        <FilterSection category="length" />
-        <FilterSection category="color" />
-      </div>
+    <div className="space-y-3">
+      <FilterSection category="collection" />
+      <FilterSection category="type" />
+      <FilterSection category="texture" />
+      <FilterSection category="length" />
+      <FilterSection category="color" />
       
-      <div className="mb-6">
-        <h4 className="font-medium mb-4">Gamme de Prix</h4>
-        <Slider
-          value={filters.priceRange}
-          onValueChange={(value) => setFilters((prev) => ({ ...prev, priceRange: value as [number, number] }))}
-          max={458500}
-          step={10}
-          className="mb-2"
-        />
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{filters.priceRange[0].toLocaleString()} FCFA</span>
-          <span>{filters.priceRange[1].toLocaleString()} FCFA</span>
-        </div>
+      <div className="border border-border/30 rounded-lg overflow-hidden">
+        <button
+          onClick={() => setExpandedFilters(prev => ({
+            ...prev,
+            price: !prev.price
+          }))}
+          className="w-full flex items-center justify-between p-3 bg-secondary/10 hover:bg-secondary/20 transition-colors"
+        >
+          <h4 className="font-medium text-sm">Gamme de Prix</h4>
+          {expandedFilters.price ? (
+            <ChevronUp className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          )}
+        </button>
+        
+        <AnimatePresence>
+          {expandedFilters.price && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="p-3">
+                <div className="px-2">
+                  <Slider
+                    value={filters.priceRange}
+                    onValueChange={(value) => setFilters((prev) => ({ ...prev, priceRange: value as [number, number] }))}
+                    max={458500}
+                    step={10}
+                    className="mb-3"
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground bg-secondary/30 rounded-lg p-2">
+                    <span className="font-medium">{filters.priceRange[0].toLocaleString()} FCFA</span>
+                    <span className="font-medium">{filters.priceRange[1].toLocaleString()} FCFA</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <Button
         variant="outline"
-        className="w-full cursor-pointer bg-[#e1b052] hover:bg-[#d89c2b]"
+        className="w-full cursor-pointer bg-[#e1b052] hover:bg-[#d89c2b] mt-4"
         onClick={() =>
           setFilters({
             type: [],
             texture: [],
             length: [],
             color: [],
-            category: [],
+            collection: [],
             priceRange: [0, 458500],
           })
         }
@@ -397,7 +270,7 @@ const Shop = () => {
   return (
     <div className="min-h-screen">
       <FixedHeader />
-      
+
       <main>
         {/* Page Header */}
         <div className="bg-secondary/30 py-16 md:py-24 pt-24">
@@ -420,8 +293,8 @@ const Shop = () => {
           </div>
         </div>
 
-        <div className="container-luxury py-12">
-          <div className="flex gap-8">
+        <div className="container-luxury py-8 sm:py-12">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
             {/* Desktop Filters Sidebar */}
             <aside className="hidden lg:block w-64 shrink-0">
               <div className="sticky top-28">
@@ -431,192 +304,276 @@ const Shop = () => {
             </aside>
 
             {/* Products Section */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               {/* Toolbar */}
-              <div className="flex items-center justify-between mb-8">
-                <p className="text-muted-foreground">
+              <div className="flex items-center justify-between gap-4 mb-8">
+                <p className="text-muted-foreground text-sm sm:text-base">
                   <span className="font-medium text-foreground">{filteredWigs.length}</span> perruques trouvées
                 </p>
 
-                <div className="flex items-center gap-4">
-                  {/* Mobile Filter Button */}
-                  <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
-                    <SheetTrigger asChild>
-                      <Button variant="outline" className="lg:hidden">
-                        <SlidersHorizontal className="h-4 w-4 mr-2" />
-                        Filtres
-                      </Button>
-                    </SheetTrigger>
-                    <SheetContent side="left">
-                      <SheetHeader>
-                        <SheetTitle className="font-serif">Filtres</SheetTitle>
+                {/* Mobile Filter Button */}
+                <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" className="lg:hidden">
+                      <SlidersHorizontal className="h-4 w-4 mr-2" />
+                      Filtres
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-[320px] sm:w-[400px] p-0 bg-white">
+                    <div className="flex flex-col h-full bg-white">
+                      <SheetHeader className="px-6 py-4 border-b border-gray-200 bg-white">
+                        <SheetTitle className="font-serif text-xl text-left text-gray-900">Filtres</SheetTitle>
                       </SheetHeader>
-                      <div className="mt-6">
+
+                      <div className="flex-1 overflow-y-auto px-6 py-4 bg-white">
+                        {/* Filtres rapides */}
+                        <div className="mb-6">
+                          <h4 className="font-medium mb-3 text-gold">Filtres Rapides</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {['Nouveautés', 'Meilleures Ventes', 'Cheveux Humains'].map((quickFilter) => (
+                              <Button
+                                key={quickFilter}
+                                variant="outline"
+                                size="sm"
+                                className={`text-xs ${(quickFilter === 'Nouveautés' && filters.collection.includes('Nouveautés')) ||
+                                    (quickFilter === 'Meilleures Ventes' && filters.collection.includes('Meilleures Ventes')) ||
+                                    (quickFilter === 'Cheveux Humains' && filters.type.includes('Cheveux Humains'))
+                                    ? 'bg-gold text-white border-gold'
+                                    : ''
+                                  }`}
+                                onClick={() => {
+                                  if (quickFilter === 'Nouveautés' || quickFilter === 'Meilleures Ventes') {
+                                    toggleFilter('collection', quickFilter);
+                                  } else if (quickFilter === 'Cheveux Humains') {
+                                    toggleFilter('type', quickFilter);
+                                  }
+                                }}
+                              >
+                                {quickFilter}
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+
                         <FiltersContent />
                       </div>
-                    </SheetContent>
-                  </Sheet>
 
-                  {/* Sort Dropdown */}
-                  <div className="relative">
-                    <select
-                      value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value)}
-                      className="appearance-none bg-card border border-border rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-gold cursor-pointer"
-                    >
-                      <option value="featured">En Vedette</option>
-                      <option value="new">Plus Récent</option>
-                      <option value="price-low">Prix: Croissant</option>
-                      <option value="price-high">Prix: Décroissant</option>
-                      <option value="rating">Mieux Noté</option>
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none text-muted-foreground" />
-                  </div>
-                </div>
+                      {/* Actions en bas */}
+                      <div className="border-t border-gray-200 p-4 bg-white">
+                        <div className="flex gap-3">
+                          <Button
+                            variant="outline"
+                            className="flex-1"
+                            onClick={() => {
+                              setFilters({
+                                type: [],
+                                texture: [],
+                                length: [],
+                                color: [],
+                                collection: [],
+                                priceRange: [0, 458500],
+                              });
+                            }}
+                          >
+                            Effacer
+                          </Button>
+                          <Button
+                            className="flex-1 bg-gold hover:bg-gold/90 text-white"
+                            onClick={() => setIsFilterOpen(false)}
+                          >
+                            Voir {filteredWigs.length} résultats
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </SheetContent>
+                </Sheet>
               </div>
 
               {/* Products Grid - Groupé par catégories */}
-              <div className="space-y-12">
-                {categoryOrder.map(categoryKey => {
-                  const categoryWigs = groupedWigs[categoryKey];
-                  if (categoryWigs.length === 0) return null;
-                  
-                  return (
-                    <div key={categoryKey} className="space-y-6">
-                      <div className="flex items-center gap-4">
-                        <h2 className="font-serif text-2xl font-medium text-foreground">
+              <div className="space-y-4 sm:space-y-6">
+              {categoryOrder.map(categoryKey => {
+                const categoryWigs = groupedWigs[categoryKey];
+                if (categoryWigs.length === 0) return null;
+
+                return (
+                  <div key={categoryKey} id={`category-${categoryKey}`} className="border border-border/30 rounded-xl overflow-hidden">
+                    <button
+                      onClick={() => {
+                        setExpandedCategories(prev => {
+                          const newState = { nouveautes: false, meilleures_ventes: false, coups_de_coeur: false, promotions: false, epuise: false };
+                          newState[categoryKey] = !prev[categoryKey];
+                          return newState;
+                        });
+                        // Scroll to top of the category section
+                        setTimeout(() => {
+                          const element = document.getElementById(`category-${categoryKey}`);
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }, 100);
+                      }}
+                      className="w-full flex items-center justify-between p-4 sm:p-6 bg-secondary/20 hover:bg-secondary/30 transition-colors"
+                    >
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <h2 className="font-serif text-lg sm:text-xl font-medium text-foreground">
                           {categoryTitles[categoryKey]}
                         </h2>
-                        <div className="h-px bg-border flex-1" />
-                        <span className="text-sm text-muted-foreground bg-secondary/50 px-3 py-1 rounded-full">
+                        <span className="text-xs sm:text-sm text-muted-foreground bg-secondary/50 px-2 sm:px-3 py-1 rounded-full">
                           {categoryWigs.length} produit{categoryWigs.length > 1 ? 's' : ''}
                         </span>
                       </div>
-                      
-                      <motion.div
-                        layout
-                        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
-                      >
-                        <AnimatePresence mode="popLayout">
-                          {categoryWigs.map((wig) => (
+                      {expandedCategories[categoryKey] ? (
+                        <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                      )}
+                    </button>
+
+                    <AnimatePresence>
+                      {expandedCategories[categoryKey] && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="p-4 sm:p-6">
                             <motion.div
-                              key={wig.id}
                               layout
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0.9 }}
-                              transition={{ duration: 0.3 }}
-                              className="group"
+                              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6"
                             >
-                              <div className="luxury-card bg-card rounded-2xl overflow-hidden border border-border/50">
-                                <div className="relative aspect-square img-zoom">
-                                  <img
-                                    src={wig.image}
-                                    alt={wig.name}
-                                    className="w-full h-full object-cover"
-                                  />
-                                  
-                                  {wig.badge && (
-                                    <Badge className="absolute top-4 left-4 bg-gold text-white border-0 font-semibold">
-                                      {wig.badge}
-                                    </Badge>
-                                  )}
-
-                                  {!wig.inStock && (
-                                    <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
-                                      <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
-                                        Épuisé
-                                      </span>
-                                    </div>
-                                  )}
-
-                                  {wig.inStock && (
-                                    <div className="absolute bottom-4 flex justify-center left-4 right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                                      <Button 
-                                        variant="gold" 
-                                        size="lg" 
-                                        className="w-[70%] bg-[#e1b052] hover:bg-[#d89c2b] cursor-pointer text-white"
-                                        onClick={() => addItem({
-                                          id: wig.id.toString(),
-                                          name: wig.name,
-                                          price: wig.price,
-                                          image: wig.image,
-                                          color: wig.color,
-                                          length: wig.length
-                                        })}
-                                      >
-                                        <ShoppingBag className="h-4 w-4" />
-                                        Ajouter au Panier
-                                      </Button>
-                                    </div>
-                                  )}
-                                </div>
-
-                                <div className="p-5">
-                                  <div className="flex items-center justify-between mb-1">
-                                    <span className="text-xs text-muted-foreground uppercase tracking-wider">
-                                      {wig.type}
-                                    </span>
-                                    <span className="text-xs text-muted-foreground">
-                                      {wig.length} • {wig.texture}
-                                    </span>
-                                  </div>
-                                  
-                                  <h3 className="font-serif text-lg font-medium mb-2 group-hover:text-gold-dark transition-colors">
-                                    <Link to={`/product/${wig.id}`}>{wig.name}</Link>
-                                  </h3>
-
-                                  <div className="flex items-center gap-2 mb-3">
-                                    <div className="flex items-center gap-0.5">
-                                      {[...Array(5)].map((_, i) => (
-                                        <Star
-                                          key={i}
-                                          className={`h-3.5 w-3.5 ${
-                                            i < Math.floor(wig.rating)
-                                              ? 'fill-gold text-gold'
-                                              : 'text-muted'
-                                          }`}
+                              <AnimatePresence mode="popLayout">
+                                {categoryWigs.map((wig) => (
+                                  <motion.div
+                                    key={wig.id}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="group"
+                                  >
+                                    <div className="luxury-card bg-card rounded-2xl overflow-hidden border border-border/50">
+                                      <div className="relative aspect-square img-zoom">
+                                        <img
+                                          src={wig.image}
+                                          alt={wig.name}
+                                          className="w-full h-full object-cover"
                                         />
-                                      ))}
-                                    </div>
-                                    <span className="text-xs text-muted-foreground">
-                                      ({wig.reviews})
-                                    </span>
-                                  </div>
 
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-lg font-semibold">{wig.price.toLocaleString()} FCFA</span>
-                                    {wig.originalPrice && (
-                                      <span className="text-sm text-muted-foreground line-through">
-                                        {wig.originalPrice.toLocaleString()} FCFA
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
+                                        {wig.badge && (
+                                          <Badge className="absolute top-4 left-4 bg-gold text-white border-0 font-semibold">
+                                            {wig.badge}
+                                          </Badge>
+                                        )}
+
+                                        {!wig.inStock && (
+                                          <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
+                                            <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
+                                              Épuisé
+                                            </span>
+                                          </div>
+                                        )}
+
+                                        {wig.inStock && (
+                                          <div className="absolute bottom-4 flex justify-center left-2 right-2 sm:left-4 sm:right-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                                            <Button
+                                              variant="gold"
+                                              size="sm"
+                                              className="w-full sm:w-[70%] bg-[#e1b052] hover:bg-[#d89c2b] cursor-pointer text-white text-xs sm:text-sm px-2 sm:px-4 py-2"
+                                              onClick={() => addItem({
+                                                id: wig.id.toString(),
+                                                name: wig.name,
+                                                price: wig.price,
+                                                image: wig.image,
+                                                color: wig.color,
+                                                length: wig.length
+                                              })}
+                                            >
+                                              <ShoppingBag className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                                              <span className="hidden sm:inline">Ajouter au Panier</span>
+                                              <span className="sm:hidden">Ajouter</span>
+                                            </Button>
+                                          </div>
+                                        )}
+                                      </div>
+
+                                      <div className="p-3 sm:p-5">
+                                        <div className="flex items-center justify-between mb-1">
+                                          <span className="text-xs text-muted-foreground uppercase tracking-wider">
+                                            {wig.type}
+                                          </span>
+                                          <span className="text-xs text-muted-foreground hidden sm:inline">
+                                            {wig.length} • {wig.texture}
+                                          </span>
+                                        </div>
+
+                                        <h3 className="font-serif text-base sm:text-lg font-medium mb-2 group-hover:text-gold-dark transition-colors line-clamp-2">
+                                          <Link to={`/product/${wig.id}`}>{wig.name}</Link>
+                                        </h3>
+
+                                        <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                                          <div className="flex items-center gap-0.5">
+                                            {[...Array(5)].map((_, i) => (
+                                              <Star
+                                                key={i}
+                                                className={`h-3 w-3 sm:h-3.5 sm:w-3.5 ${i < Math.floor(wig.rating)
+                                                    ? 'fill-gold text-gold'
+                                                    : 'text-muted'
+                                                  }`}
+                                              />
+                                            ))}
+                                          </div>
+                                          <span className="text-xs text-muted-foreground">
+                                            ({wig.reviews})
+                                          </span>
+                                        </div>
+
+                                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                                          <span className="text-base sm:text-lg font-semibold">{wig.price.toLocaleString()} FCFA</span>
+                                          {wig.originalPrice && (
+                                            <span className="text-xs sm:text-sm text-muted-foreground line-through">
+                                              {wig.originalPrice.toLocaleString()} FCFA
+                                            </span>
+                                          )}
+                                        </div>
+
+                                        {/* Mobile details */}
+                                        <div className="sm:hidden mt-2 text-xs text-muted-foreground">
+                                          {wig.length} • {wig.texture}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </motion.div>
+                                ))}
+                              </AnimatePresence>
                             </motion.div>
-                          ))}
-                        </AnimatePresence>
-                      </motion.div>
-                    </div>
-                  );
-                })}
-              </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
 
               {filteredWigs.length === 0 && (
-                <div className="text-center py-20">
-                  <p className="text-xl text-muted-foreground mb-4">
+                <div className="text-center py-12 sm:py-20 px-4">
+                  <p className="text-lg sm:text-xl text-muted-foreground mb-4">
                     Aucune perruque ne correspond à vos filtres
                   </p>
                   <Button
                     variant="outline"
+                    className="w-full sm:w-auto"
                     onClick={() =>
                       setFilters({
                         type: [],
                         texture: [],
                         length: [],
                         color: [],
-                        category: [],
+                        collection: [],
                         priceRange: [0, 458500],
                       })
                     }

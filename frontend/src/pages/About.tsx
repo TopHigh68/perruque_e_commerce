@@ -5,7 +5,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-model-1.jpg';
-import heroImage1 from '../../public/perruques/heroaboutimage.jpg';
+import heroImage1 from '@/assets/perruques/heroaboutimage.jpg';
 
 
 const About = () => {
