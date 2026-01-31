@@ -25,7 +25,7 @@ export function FixedHeader() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50 shadow-soft py-3 transition-all duration-500">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border/50 shadow-soft py-3 transition-all duration-500">
         <div className="container-luxury flex items-center justify-between">
           {/* Mobile Menu Toggle */}
           <Button
